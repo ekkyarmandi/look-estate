@@ -51,7 +51,7 @@
 
 <style scoped>
 nav {
-  padding: 1rem 5rem;
+  padding: 1rem 3.125rem;
   border-bottom: 1px solid #ccc;
 }
 </style>
