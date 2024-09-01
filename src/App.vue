@@ -1,30 +1,19 @@
 <template>
-  <nav>
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
-  </nav>
-  <router-view/>
+  <!-- <router-link to="/">Home</router-link> -->
+  <router-view />
 </template>
 
+<style src="./assets/tailwind.css"></style>
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
+:root {
+  --primary-500: #3fba84;
+  --primary-600: hsl(154, 49%, 54%);
+  --secondary-500: #30485e;
 }
-
-nav {
-  padding: 30px;
+* {
+  font-family: "Inter", sans-serif;
 }
-
-nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-nav a.router-link-exact-active {
-  color: #42b983;
+body {
+  max-width: 1440px;
 }
 </style>
