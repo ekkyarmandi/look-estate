@@ -1,6 +1,6 @@
 <template>
   <div>
-  <p>This website is part of <a href="https://ekkyarmandi.com">EkkyArmandi</a> portfolio</p>
+  <p>This website is part of <a href="https://ekkyarmandi.com">EkkyArmandi.com</a> portfolio</p>
   </div>
 </template>
 

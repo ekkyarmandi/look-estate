@@ -1,18 +1,28 @@
 <template>
   <!-- <router-link to="/">Home</router-link> -->
-  <Copyright />
-  <Header />
+  <Copyright/>
+  <div class="nav-border"><Header/></div>
+  <ResultFound/>
+  <ListingContainer/>
+  <div class="footer-bg"><Footer/></div>
   <router-view/>
 </template>
 
 <script>
 import Header from "@/components/Header.vue";
 import Copyright from "@/components/Copyright.vue";
+import ResultFound from "@/components/ResultFound.vue";
+import ListingContainer from "@/components/ListingContainer.vue";
+import Footer from "@/components/Footer.vue";
+
 export default {
   name: 'App',
   components: {
     Header,
     Copyright,
+    ResultFound,
+    ListingContainer,
+    Footer,
   }
 }
 </script>
@@ -29,9 +39,16 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
 }
-.wrapper{
+.wrapper {
   padding-left: 3.125rem;
   padding-right: 3.125rem;
   max-width: 1440px;
+  margin: auto;
+}
+.nav-border {
+  border: 1px solid #ccc;
+}
+.footer-bg {
+  background-color: var(--secondary-500);
 }
 </style>

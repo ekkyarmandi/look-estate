@@ -1,12 +1,17 @@
 <template>
-  <button type="button" :class="class"><slot/></button>
+  <button type="button" :class="btnClass"><slot /></button>
 </template>
 
 <script>
 export default {
   name: "Button",
   props: ["class"],
-}
+  computed: {
+    btnClass() {
+      return this.class;
+    },
+  },
+};
 </script>
 
 <style>

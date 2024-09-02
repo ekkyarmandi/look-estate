@@ -41,7 +41,6 @@ nav {
   grid-template-columns: 1fr 2fr 1fr;
   padding-top: 12px;
   padding-bottom: 12px;
-  border-bottom: 1px solid #ccc;
 }
 .menu {
   display: flex;
