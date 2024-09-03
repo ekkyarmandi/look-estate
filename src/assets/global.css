@@ -6,3 +6,13 @@
   --secondary-400: #89a7c3;
   --secondary-500: #2c3e50;
 }
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem 0;
+  width: 380px;
+  border-radius: 12px;
+  background-color: white;
+  padding: 20px;
+}

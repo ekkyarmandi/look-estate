@@ -44,7 +44,7 @@
       </div>
     </div>
   </footer>
-  <p>&copy; 2024 Copyright. <a href="https://ekkyarmandi.com">EkkyArmandi.com</a>. All Right Reserved.</p>
+  <p>&copy; Copyright 2024. <a href="https://ekkyarmandi.com">EkkyArmandi.com</a>. All Rights Reserved.</p>
   </div>
 </template>
 

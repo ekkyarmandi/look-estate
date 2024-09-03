@@ -23,6 +23,10 @@ button {
   border: 0;
   border-radius: 0.5rem;
   cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
 }
 .btn-primary {
   background-color: var(--primary-500);
@@ -42,5 +46,8 @@ button {
   justify-content: center;
   align-items: center;
   flex-shrink: 0;
+}
+.w-full {
+  width: 100%;
 }
 </style>

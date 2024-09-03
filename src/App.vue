@@ -2,17 +2,13 @@
   <!-- <router-link to="/">Home</router-link> -->
   <Copyright/>
   <div class="nav-border"><Header/></div>
-  <ResultFound/>
-  <ListingContainer/>
-  <div class="footer-bg"><Footer/></div>
   <router-view/>
+  <div class="footer-bg"><Footer/></div>
 </template>
 
 <script>
 import Header from "@/components/Header.vue";
 import Copyright from "@/components/Copyright.vue";
-import ResultFound from "@/components/ResultFound.vue";
-import ListingContainer from "@/components/ListingContainer.vue";
 import Footer from "@/components/Footer.vue";
 
 export default {
@@ -20,8 +16,6 @@ export default {
   components: {
     Header,
     Copyright,
-    ResultFound,
-    ListingContainer,
     Footer,
   }
 }

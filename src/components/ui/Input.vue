@@ -15,7 +15,7 @@ input {
   border: 1px solid #ccc;
   padding: 0 1rem;
   border-radius: 0.5rem;
-  width: 100%;
+  width: -webkit-fill-available;
   height: 40px;
 }
 </style>
