@@ -1,10 +1,10 @@
 <template>
   <div class="listing-item">
     <div class="thumbnail-container">
-      <img class="thumbnail-image" src="@/assets/thumbnail.png" :alt="'Thumbnail of ' + title" />
+      <img class="thumbnail-image" src="@/assets/thumbnail.png" :alt="'Thumbnail of ' + data.title" />
       <ul class="dots">
         <li class="dot active"></li>
-        <li v-for:="dot in dots" class="dot"></li>
+        <li v-for:="dot in data.dots" class="dot"></li>
       </ul>
       <div class="btn-container">
         <div class="btn-group">
@@ -14,46 +14,46 @@
       </div>
       <div class="listing-location">
         <LocationIcon color="white" />
-        <p>{{ location }}</p>
+        <p>{{ data.location }}</p>
       </div>
       <div class="btn-like">
         <HearthIcon hideNumber="true" color="white" />
       </div>
     </div>
     <div class="title-wrapper">
-      <h2>{{ title }}</h2>
-      <p class="price">{{ price_usd }}</p>
+      <h2>{{ data.title }}</h2>
+      <p class="price">{{ data.price_usd }}</p>
     </div>
     <div class="badges">
       <Badge
         ><HashIcon />
-        <p>{{ id }}</p></Badge
+        <p>{{ data.id }}</p></Badge
       >
       <Badge
         ><BedIcon />
-        <p>{{ bedrooms }}</p></Badge
+        <p>{{ data.bedrooms }}</p></Badge
       >
       <Badge
         ><BathIcon />
-        <p>{{ bathrooms }}</p></Badge
+        <p>{{ data.bathrooms }}</p></Badge
       >
       <Badge
         ><BuildingIcon />
-        <p>{{ buildingSize }} sqm</p></Badge
+        <p>{{ data.buildingSize }} sqm</p></Badge
       >
       <Badge
         ><AreaIcon />
-        <p>{{ landSize }} sqm</p></Badge
+        <p>{{ data.landSize }} sqm</p></Badge
       >
       <Badge
         ><ScriptIcon />
-        <p>{{ contract_type }}</p></Badge
+        <p>{{ data.contract_type }}</p></Badge
       >
     </div>
   </div>
 </template>
 
-<script>
+<script setup>
 import Badge from "@/components/Badge.vue";
 import HashIcon from "@/assets/icons/HashIcon.vue";
 import BedIcon from "@/assets/icons/BedIcon.vue";
@@ -65,52 +65,38 @@ import LeftIcon from "@/assets/icons/LeftIcon.vue";
 import RightIcon from "@/assets/icons/RightIcon.vue";
 import LocationIcon from "@/assets/icons/LocationIcon.vue";
 import HearthIcon from "@/assets/icons/HearthIcon.vue";
-export default {
-  name: "ListingItem",
-  components: {
-    Badge,
-    HashIcon,
-    BedIcon,
-    BathIcon,
-    BuildingIcon,
-    AreaIcon,
-    ScriptIcon,
-    LeftIcon,
-    RightIcon,
-    LocationIcon,
-    HearthIcon,
-  },
-  computed: {
-    price_usd() {
-      return this.price
-        .toLocaleString("en-US", {
-          style: "currency",
-          currency: "USD",
-        })
-        .replace(".00", "");
-    },
-    buildingSize() {
-      return this.building_size.toLocaleString("en-Us");
-    },
-    landSize() {
-      return this.land_size.toLocaleString("en-Us");
-    },
-  },
-  data() {
-    return {
-      id: "436393",
-      title: "Charming One Bedroom Villa in Ubud with A Spacious Garden",
-      location: "Ubud, Bali",
-      contract_type: "Leasehold",
-      price: 10000,
-      bedrooms: 2,
-      bathrooms: 2,
-      building_size: 1234,
-      land_size: 1234,
-      dots: [1, 2, 3, 4],
-    };
-  },
-};
+
+import { ref, computed } from "vue";
+
+const data = ref({
+  id: "436393",
+  title: "Charming One Bedroom Villa in Ubud with A Spacious Garden",
+  location: "Ubud, Bali",
+  contract_type: "Leasehold",
+  price: 10000,
+  bedrooms: 2,
+  bathrooms: 2,
+  building_size: 1234,
+  land_size: 1234,
+  dots: [1, 2, 3, 4],
+});
+
+const price_usd = computed(() => {
+  return data.value.price
+    .toLocaleString("en-US", {
+      style: "currency",
+      currency: "USD",
+    })
+    .replace(".00", "");
+});
+
+const buildingSize = computed(() => {
+  return data.value.building_size.toLocaleString("en-US");
+});
+
+const landSize = computed(() => {
+  return data.value.land_size.toLocaleString("en-US");
+});
 </script>
 
 <style scoped>
