@@ -28,13 +28,11 @@ export default {
 <style scoped>
 ul {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 32px 30px;
+  grid-template-columns: repeat(3, min(427px));
+  justify-content: space-between;
+  row-gap: 30px;
+  width: 100%;
   list-style-type: none;
-}
-ul li {
-  display: flex;
-  justify-content: center;
 }
 .listing-container {
   margin-bottom: 40px;

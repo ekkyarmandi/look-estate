@@ -1,9 +1,9 @@
 <template>
   <!-- <router-link to="/">Home</router-link> -->
-  <Copyright/>
-  <div class="nav-border"><Header/></div>
-  <router-view/>
-  <div class="footer-bg"><Footer/></div>
+  <Copyright />
+  <div class="nav-border"><Header /></div>
+  <router-view />
+  <div class="footer-bg"><Footer /></div>
 </template>
 
 <script>
@@ -12,13 +12,13 @@ import Copyright from "@/components/Copyright.vue";
 import Footer from "@/components/Footer.vue";
 
 export default {
-  name: 'App',
+  name: "App",
   components: {
     Header,
     Copyright,
     Footer,
-  }
-}
+  },
+};
 </script>
 
 <style src="./assets/global.css"></style>
@@ -28,7 +28,7 @@ export default {
   padding: 0;
 }
 #app {
-  font-family: 'Inter', Helvetica, Arial, sans-serif;
+  font-family: "Inter", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
