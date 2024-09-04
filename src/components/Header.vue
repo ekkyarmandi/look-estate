@@ -1,13 +1,15 @@
 <template>
   <nav class="wrapper">
-    <Logo/>
+    <a href="/">
+      <Logo />
+    </a>
     <div class="search">
-      <Input placeholder="Search"/>
-      <Button class="box btn-primary"><SearchIcon/></Button>
-      <Button class="box btn-light"><FilterIcon/></Button>
+      <Input placeholder="Search" />
+      <Button class="box btn-primary"><SearchIcon /></Button>
+      <Button class="box btn-light"><FilterIcon /></Button>
     </div>
     <div class="menu">
-      <HearthIcon/>
+      <HearthIcon />
       <Button class="btn-primary">Join Us</Button>
       <p>or</p>
       <p class="btn">Login</p>
@@ -31,8 +33,8 @@ export default {
     SearchIcon,
     FilterIcon,
     HearthIcon,
-  }
-}
+  },
+};
 </script>
 
 <style scoped>

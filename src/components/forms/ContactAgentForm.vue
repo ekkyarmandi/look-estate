@@ -1,43 +1,42 @@
 <template>
   <form id="contact-agent" class="">
     <div class="contact-info">
-      <div class="img"></div>
+      <img :src="data.photograph" :alt="data.name" />
       <div class="contact-detail">
-        <p>Contact Name</p>
-        <p><span>From: </span>Company Name</p>
+        <p>{{ data.name }}</p>
+        <p><span>From: </span>{{ data.company }}</p>
       </div>
     </div>
-    <Button class="btn-primary w-full">
-      <WhatsAppIcon />
-      <p>Contact Agent</p>
-    </Button>
+    <a :href="data.whatsapp">
+      <Button class="btn-primary w-full">
+        <WhatsAppIcon />
+        <p>Contact Agent</p>
+      </Button>
+    </a>
   </form>
 </template>
 
-<script>
+<script setup>
 import Button from "@/components/ui/Button.vue";
 import WhatsAppIcon from "@/assets/icons/WhatsAppIcon.vue";
-export default {
-  name: 'ContactAgentForm',
-  components: {
-    Button,
-    WhatsAppIcon,
-  }
-}
+
+import { defineProps } from "vue";
+
+const { data } = defineProps(["data"]);
 </script>
 
 <style scoped>
-.img {
-  width: 100px;
-  height: 100px;
-  background-color: #d9d9d950;
+img {
+  width: 120px;
+  height: 120px;
   border-radius: 12px;
-  border: 2px solid #d9d9d9;
+  object-fit: cover;
+  object-position: top;
 }
 .contact-info {
   display: flex;
   align-items: center;
-  gap: 20px;
+  gap: 16px;
 }
 .contact-detail p:first-child {
   margin-bottom: 12px;
@@ -45,5 +44,8 @@ export default {
 }
 .contact-detail span {
   opacity: 0.5;
+}
+a {
+  text-decoration: none;
 }
 </style>

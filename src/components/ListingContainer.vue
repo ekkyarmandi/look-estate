@@ -9,20 +9,10 @@
   </div>
 </template>
 
-<script>
+<script setup>
+import { ref } from "vue";
 import ListingItem from "@/components/ListingItem.vue";
-
-export default {
-  name: "ListingContainer",
-  components: {
-    ListingItem,
-  },
-  data() {
-    return {
-      items: [1, 2, 3, 4, 5, 6, 7, 8],
-    };
-  },
-};
+const items = ref([1, 2, 3, 4, 5, 6, 7, 8]);
 </script>
 
 <style scoped>

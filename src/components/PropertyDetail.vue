@@ -3,7 +3,7 @@
     <div class="attribute-item">
       <div class="item">
         <ScriptIcon />
-        <p class="value">{{ data.contract_type }}</p>
+        <p class="value">{{ data.hold_type }}</p>
       </div>
       <p class="attribute-title">Contract Type</p>
     </div>
@@ -31,38 +31,25 @@
     <div class="attribute-item">
       <div class="item">
         <BuildingIcon />
-        <p class="value">{{ buildingSize }} <span>sqm</span></p>
+        <p class="value">{{ buildSize }} <span>sqm</span></p>
       </div>
       <p class="attribute-title">Building Size</p>
     </div>
   </div>
 </template>
 
-<script>
+<script setup>
 import ScriptIcon from "@/assets/icons/ScriptIcon.vue";
 import BedIcon from "@/assets/icons/BedIcon.vue";
 import BathIcon from "@/assets/icons/BathIcon.vue";
 import AreaIcon from "@/assets/icons/AreaIcon.vue";
 import BuildingIcon from "@/assets/icons/BuildingIcon.vue";
-export default {
-  name: "PropertyDetail",
-  props: ["data"],
-  components: {
-    ScriptIcon,
-    BedIcon,
-    BathIcon,
-    AreaIcon,
-    BuildingIcon,
-  },
-  computed: {
-    buildingSize() {
-      return this.data.building_size.toLocaleString("en-Us");
-    },
-    landSize() {
-      return this.data.land_size.toLocaleString("en-Us");
-    },
-  },
-};
+
+import { computed, defineProps } from "vue";
+
+const { data } = defineProps(["data"]);
+const buildSize = computed(() => data.build_size.toLocaleString("en-Us"));
+const landSize = computed(() => data.land_size.toLocaleString("en-Us"));
 </script>
 
 <style scoped>
