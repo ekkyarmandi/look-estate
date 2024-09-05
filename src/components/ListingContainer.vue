@@ -1,8 +1,9 @@
 <template>
   <div class="wrapper listing-container">
-    <ul>
+    <div v-if:="isLoading">Loading</div>
+    <ul v-if:="!isLoading">
       <li v-for:="item in items">
-        <ListingItem />
+        <ListingItem :data="item" :key="item.id"/>
       </li>
     </ul>
     <l-dot-pulse size="43" speed="1.3" color="#42b983"></l-dot-pulse>
@@ -10,9 +11,19 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { ref, onMounted } from "vue";
 import ListingItem from "@/components/ListingItem.vue";
-const items = ref([1, 2, 3, 4, 5, 6, 7, 8]);
+
+const items = ref([]);
+const isLoading = ref(true);
+
+onMounted(()=>{
+  const url = "http://localhost:8000/properties";
+  fetch(url).then((res)=>res.json()).then((data)=>{
+    items.value.push(...data);
+    isLoading.value = false;
+  });
+});
 </script>
 
 <style scoped>

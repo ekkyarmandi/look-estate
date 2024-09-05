@@ -1,15 +1,14 @@
 <template>
   <div class="listing-item">
     <div class="thumbnail-container">
-      <img class="thumbnail-image" src="@/assets/thumbnail.png" :alt="'Thumbnail of ' + data.title" />
+      <img class="thumbnail-image" :src="thumbnail" :alt="'Thumbnail of ' + data.title" />
       <ul class="dots">
-        <li class="dot active"></li>
-        <li v-for:="dot in data.dots" class="dot"></li>
+        <li :key="idx" v-for:="(_, idx) in data.images.slice(0, 15)" :class="activeIdx == idx ? 'dot active' : 'dot'" @click="handleThumbnailChanges(idx)"></li>
       </ul>
       <div class="btn-container">
         <div class="btn-group">
-          <button class="btn-circle"><LeftIcon /></button>
-          <button class="btn-circle"><RightIcon /></button>
+          <button class="btn-circle" @click="handleThumbnailChanges(activeIdx - 1)"><LeftIcon /></button>
+          <button class="btn-circle" @click="handleThumbnailChanges(activeIdx + 1)"><RightIcon /></button>
         </div>
       </div>
       <div class="listing-location">
@@ -21,8 +20,8 @@
       </div>
     </div>
     <div class="title-wrapper">
-      <h2>{{ data.title }}</h2>
-      <p class="price">{{ data.price_usd }}</p>
+      <a :href="'/property/' + data.id"><h2>{{ data.title }}</h2></a>
+      <p class="price">{{ priceUsd }}</p>
     </div>
     <div class="badges">
       <Badge
@@ -39,15 +38,15 @@
       >
       <Badge
         ><BuildingIcon />
-        <p>{{ data.buildingSize }} sqm</p></Badge
+        <p>{{ buildingSize }} sqm</p></Badge
       >
       <Badge
         ><AreaIcon />
-        <p>{{ data.landSize }} sqm</p></Badge
+        <p>{{ landSize }} sqm</p></Badge
       >
       <Badge
         ><ScriptIcon />
-        <p>{{ data.contract_type }}</p></Badge
+        <p>{{ data.hold_type }}</p></Badge
       >
     </div>
   </div>
@@ -66,23 +65,15 @@ import RightIcon from "@/assets/icons/RightIcon.vue";
 import LocationIcon from "@/assets/icons/LocationIcon.vue";
 import HearthIcon from "@/assets/icons/HearthIcon.vue";
 
-import { ref, computed } from "vue";
+import { ref, computed, defineProps } from "vue";
 
-const data = ref({
-  id: "436393",
-  title: "Charming One Bedroom Villa in Ubud with A Spacious Garden",
-  location: "Ubud, Bali",
-  contract_type: "Leasehold",
-  price: 10000,
-  bedrooms: 2,
-  bathrooms: 2,
-  building_size: 1234,
-  land_size: 1234,
-  dots: [1, 2, 3, 4],
-});
+const { data } = defineProps(["data"]);
 
-const price_usd = computed(() => {
-  return data.value.price
+const activeIdx = ref(0);
+const thumbnail = ref(data.images[0]);
+
+const priceUsd = computed(() => {
+  return data.price
     .toLocaleString("en-US", {
       style: "currency",
       currency: "USD",
@@ -91,12 +82,27 @@ const price_usd = computed(() => {
 });
 
 const buildingSize = computed(() => {
-  return data.value.building_size.toLocaleString("en-US");
+  return data.build_size.toLocaleString("en-US");
 });
 
 const landSize = computed(() => {
-  return data.value.land_size.toLocaleString("en-US");
+  return data.land_size.toLocaleString("en-US");
 });
+
+// Carousel
+const handleThumbnailChanges = (idx) => {
+  activeIdx.value = idx;
+  if(idx > data.images.length || idx >= 15){
+    activeIdx.value = 0;
+  } else if (idx < 0) {
+    if(data.images.length > 15){
+      activeIdx.value = 14;
+    } else {
+      activeIdx.value = data.images.length;
+    }
+  }
+  thumbnail.value = data.images[activeIdx.value];
+};
 </script>
 
 <style scoped>
@@ -119,6 +125,10 @@ h2 {
   color: var(--secondary-500);
   gap: 8px;
 }
+.title-wrapper a {
+  text-decoration: none;
+  color: inherit;
+}
 .price {
   font-size: 18px;
   font-weight: 600;
@@ -135,6 +145,9 @@ h2 {
 .thumbnail-container {
   position: relative;
   height: 320px;
+  overflow: hidden;
+  border-radius: 12px;
+  object-fit: cover;
 }
 .dots {
   position: absolute;
@@ -148,8 +161,8 @@ h2 {
   cursor: pointer;
 }
 .dot {
-  width: 10px;
-  height: 10px;
+  width: 8px;
+  height: 8px;
   border-radius: 100%;
   background-color: #d9d9d9;
   opacity: 0.5;
