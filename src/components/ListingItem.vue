@@ -26,7 +26,7 @@
       </div>
     </div>
     <div class="title-wrapper">
-      <a :href="'/property/' + data.id">
+      <a :href="'/properties/' + data.id">
         <h2>{{ data.title }}</h2>
       </a>
       <p class="price">{{ priceUsd }}</p>
@@ -100,7 +100,7 @@ const landSize = computed(() => {
 
 // Carousel
 const handleThumbnailChanges = (idx, event) => {
-  const imagesLen = data.images.length;
+  const imagesLen = data.images.length < 15 ? data.images.length : 15;
   const thumbnailContainer = event.target.closest("div.thumbnail-container");
   const images = thumbnailContainer.querySelectorAll(".images img");
 
@@ -163,6 +163,11 @@ h2 {
 
 .title-wrapper a {
   text-decoration: none;
+  color: inherit;
+}
+
+.title-wrapper a:hover {
+  text-decoration: underline;
   color: inherit;
 }
 
