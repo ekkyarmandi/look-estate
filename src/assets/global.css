@@ -16,3 +16,21 @@ form {
   background-color: white;
   padding: 20px;
 }
+
+.dots {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 6px;
+  list-style: none;
+  cursor: pointer;
+}
+
+.dots.property {
+  bottom: 10%;
+}
+
+.dots.thumbnail {
+  bottom: 24%;
+}

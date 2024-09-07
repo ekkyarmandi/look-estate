@@ -6,22 +6,33 @@
         <p>ID: {{ data.id }}</p>
         <div class="listing-title">
           <h1>{{ data.title }}</h1>
-          <p>{{ data.priceUsd }}</p>
+          <p>{{ priceUsd }}</p>
         </div>
         <div class="listing-id">
           <div class="listing-location">
             <LocationIcon />
             <p>{{ data.location }}</p>
           </div>
-          <div class="btn-group">
+          <div class="btns">
             <Button class="box"><HearthIcon hideNumber="true" /></Button>
             <Button class="box btn-primary"><ShareIcon /></Button>
           </div>
         </div>
         <div class="image-container">
-          <img v-if:="data.images.length > 0" :src="data.images[0]" :alt="'Thumbnail of ' + data.title" />
-          <div class="image-options">
-            <img v-for:="img in data.images" :src="img" :alt="'Thumbnail of ' + data.title" />
+          <Thumbnail :images="data.images" style="width: 754px;" dotsClass="property" />
+          <div
+            class="image-options"
+            ref="imageOptions"
+            @mousedown="onMouseDown"
+            @mousemove="onMouseMove"
+            @mouseup="onMouseUp"
+            @mouseleave="onMouseLeave"
+          >
+            <img
+              v-for:="img in data.images.slice(0, 15)"
+              :src="img"
+              :alt="'Thumbnail of ' + data.title"
+            />
           </div>
         </div>
         <PropertyDetail :data="data" />
@@ -43,13 +54,16 @@ import PropertyDescription from "@/components/PropertyDescription.vue";
 import HearthIcon from "@/assets/icons/HearthIcon.vue";
 import LocationIcon from "@/assets/icons/LocationIcon.vue";
 import ShareIcon from "@/assets/icons/ShareIcon.vue";
+import LeftIcon from "@/assets/icons/LeftIcon.vue";
+import RightIcon from "@/assets/icons/RightIcon.vue";
+import Thumbnail from "@/components/Thumbnail.vue";
 
 import { ref, computed, defineProps, onMounted } from "vue";
 
 const props = defineProps(["id"]);
 const prefix = "http://localhost:8000";
 
-const data = ref({ id: props.id });
+const data = ref({ id: props.id, images: [] });
 const isLoading = ref(true);
 
 onMounted(() => {
@@ -70,81 +84,143 @@ const priceUsd = computed(() => {
     })
     .replace(".00", "");
 });
+
+// scroll image options
+const isDragging = ref(false);
+const startX = ref(0);
+const scrollLeft = ref(0);
+const imageOptions = ref(null);
+function onMouseDown(event) {
+  event.preventDefault();
+  isDragging.value = true;
+  startX.value = event.pageX - imageOptions.value.offsetLeft;
+  scrollLeft.value = imageOptions.value.scrollLeft;
+}
+function onMouseMove(event) {
+  if (!isDragging.value) return;
+  event.preventDefault();
+  const x = event.pageX - imageOptions.value.offsetLeft;
+  const walk = (x - startX.value) * 1; // Adjust the scroll speed
+  imageOptions.value.scrollLeft = scrollLeft.value - walk;
+}
+function onMouseUp() {
+  isDragging.value = false;
+}
+function onMouseLeave() {
+  isDragging.value = false;
+}
+
 </script>
 
 <style scoped>
 section {
   background-color: #d9d9d9;
 }
+
+.content {
+  width: 754px;
+}
+
 .content > p {
   font-size: 18px;
 }
+
 .wrapper {
   padding: 20px 145px;
   display: flex;
   gap: 20px;
 }
+
 .content {
   display: flex;
   flex-direction: column;
   gap: 8px;
   padding: 43px 0;
 }
+
 .contact {
   display: flex;
   flex-direction: column;
   gap: 20px;
   padding: 43px 0;
 }
+
 .listing-title {
   display: flex;
   align-items: end;
   gap: 8px;
 }
+
 .listing-title h1 {
   font-size: 32px;
   font-weight: bold;
 }
+
 .listing-title p {
   font-size: 28px;
 }
+
 .listing-id {
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
+
 .listing-location {
   display: flex;
   align-items: center;
   gap: 8px;
 }
+
 .listing-location p {
   font-size: 18px;
 }
-.btn-group {
+
+.btns {
   display: flex;
   align-items: center;
   gap: 8px;
 }
+
 .image-container {
-  width: 754px;
+  display: flex;
+  flex-direction: column;
   overflow: hidden;
+  gap: 8px;
 }
-.image-container > img {
+
+.image-container img {
   width: 100%;
   border-radius: 8px;
-  margin-bottom: 8px;
 }
+
+.images img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 0;
+}
+
+.images img[data-index="0"] {
+  z-index: 1;
+}
+
 .image-options {
-  overflow: scroll;
   display: flex;
+  overflow-x: scroll;
+  cursor: grab;
   gap: 8px;
-  overflow-x: hidden;
-  overflow-y: hidden;
 }
+
+.image-options:active {
+  cursor: grabbing;
+}
+
 .image-options img {
   width: 150px;
   height: 112.5px;
   object-fit: cover;
+  /* flex: 0 0 auto; */
+  user-select: none;
 }
 </style>
