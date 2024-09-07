@@ -1,14 +1,8 @@
 <template> 
   <form id="getInTouch">
     <h2>Get In Touch</h2>
-    <div>
-      <label for="name">Name</label>
-      <Input />
-    </div>
-    <div>
-      <label for="email">Email</label>
-      <Input />
-    </div>
+    <Input placeholder="Full Name" />
+    <Input placeholder="Email"/>
     <div>
       <label for="message">Message</label>
       <textarea placeholder="type your message here"></textarea>
@@ -17,16 +11,9 @@
   </form>
 </template> 
 
-<script>
+<script setup>
 import Input from "@/components/ui/Input.vue";
 import Button from "@/components/ui/Button.vue";
-export default {
-  name: 'GetInTouchForm',
-  components: {
-    Input,
-    Button,
-  }
-}
 </script>
 
 <style scoped>

@@ -27,8 +27,8 @@ const { data } = defineProps(["data"]);
 
 <style scoped>
 img {
-  width: 120px;
-  height: 120px;
+  width: 110px;
+  height: 110px;
   border-radius: 12px;
   object-fit: cover;
   object-position: top;
@@ -47,5 +47,8 @@ img {
 }
 a {
   text-decoration: none;
+}
+p {
+  font-size: 14px;
 }
 </style>
