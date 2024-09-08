@@ -111,7 +111,7 @@ p.label {
     text-align: center;
     line-height: 24px;
   }
-  .contact {
+  .content {
     padding-bottom: 24px;
     border-bottom: 1px solid #ffffff50;
   }
