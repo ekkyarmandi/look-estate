@@ -1,16 +1,16 @@
 <template>
-  <div class="wrapper">
-    <div class="result">
-      <p>Sort By Price: Low to High</p>
-      <p><span>10</span> Properties Found</p>
-    </div>
+  <div class="result">
+    <p>Sort By Price: Low to High</p>
+    <p>
+      <span>{{ total }}</span> Properties Found
+    </p>
   </div>
 </template>
 
-<script>
-export default {
-  name: "ResultFound",
-};
+<script setup>
+import { computed, defineProps } from "vue";
+
+const { total } = defineProps(["total"]);
 </script>
 
 <style scoped>

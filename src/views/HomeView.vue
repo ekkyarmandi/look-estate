@@ -1,17 +1,7 @@
 <template>
-  <ResultFound/>
-  <ListingContainer/>
+  <ListingContainer />
 </template>
 
-<script>
-import ResultFound from "@/components/ResultFound.vue";
+<script setup>
 import ListingContainer from "@/components/ListingContainer.vue";
-
-export default {
-  name: 'HomeView',
-  components: {
-    ResultFound,
-    ListingContainer
-  }
-}
 </script>

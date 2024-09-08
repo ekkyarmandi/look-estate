@@ -1,90 +1,96 @@
 <template>
   <div class="wrapper">
-  <footer>
-    <div class="content">
-      <Logo/>
-      <div class="contact">
-        <p class="label">Contact</p>
+    <footer>
+      <div class="content">
+        <Logo />
+        <div class="contact">
+          <p class="label">Contact</p>
+          <div>
+            <MailIcon />
+            <a class="email" href="mailto:ekkyarmandi.com">ekkyarmandi@gmail.com</a>
+          </div>
+          <div>
+            <PhoneIcon />
+            <p>+62 899 9999 9999</p>
+          </div>
+        </div>
+      </div>
+      <div class="links">
         <div>
-          <MailIcon/>
-          <a class="email" href="mailto:ekkyarmandi.com">ekkyarmandi@gmail.com</a>
+          <p class="label">Contact</p>
+          <ul>
+            <li><a href="#">Bali</a></li>
+            <li><a href="#">Yogyakarta</a></li>
+            <li><a href="#">Bandung</a></li>
+            <li><a href="#">Jakarta</a></li>
+          </ul>
         </div>
         <div>
-          <PhoneIcon/>
-          <p>+62 899 9999 9999</p>
+          <p class="label">Information</p>
+          <ul>
+            <li><a href="#">Blog</a></li>
+            <li><a href="#">Testimonials</a></li>
+            <li><a href="#">About Us</a></li>
+          </ul>
+        </div>
+        <div>
+          <p class="label">Follow Us</p>
+          <ul>
+            <li><a href="#">Facebook</a></li>
+            <li><a href="#">Twitter</a></li>
+            <li><a href="#">Instagram</a></li>
+            <li><a href="#">Pinterest</a></li>
+          </ul>
         </div>
       </div>
-    </div>
-    <div class="links">
-      <div>
-        <p class="label">Contact</p>
-        <ul>
-          <li><a href="#">Bali</a></li>
-          <li><a href="#">Yogyakarta</a></li>
-          <li><a href="#">Bandung</a></li>
-          <li><a href="#">Jakarta</a></li>
-        </ul>
-      </div>
-      <div>
-        <p class="label">Information</p>
-        <ul>
-          <li><a href="#">Blog</a></li>
-          <li><a href="#">Testimonials</a></li>
-          <li><a href="#">About Us</a></li>
-        </ul>
-      </div>
-      <div>
-        <p class="label">Follow Us</p>
-        <ul>
-          <li><a href="#">Facebook</a></li>
-          <li><a href="#">Twitter</a></li>
-          <li><a href="#">Instagram</a></li>
-          <li><a href="#">Pinterest</a></li>
-        </ul>
-      </div>
-    </div>
-  </footer>
-  <p>&copy; Copyright 2024. <a href="https://ekkyarmandi.com">EkkyArmandi.com</a>. All Rights Reserved.</p>
+    </footer>
+    <p class="copyright">&copy; Copyright 2024. <a href="https://ekkyarmandi.com">EkkyArmandi.com</a>. All Rights Reserved.</p>
   </div>
 </template>
 
-<script>
+<script setup>
 import Logo from "@/assets/icons/Logo.vue";
 import MailIcon from "@/assets/icons/MailIcon.vue";
 import PhoneIcon from "@/assets/icons/PhoneIcon.vue";
-export default {
-  name: "Footer",
-  components: {
-    Logo,
-    MailIcon,
-    PhoneIcon,
-  }
-}
 </script>
 
 <style scoped>
+a,
+p {
+  color: white;
+  text-decoration: none;
+}
+a:hover {
+  color: var(--primary-500);
+  text-decoration: underline;
+}
 footer {
   display: flex;
   justify-content: space-between;
-  color: white;
   padding: 60px 0 28px 0;
   border-bottom: 1px solid #ccc;
 }
-footer + p {
-  color: white;
+p.copyright {
   padding: 12px 0;
-  font-size: 12px;
 }
-footer + p a {
+p.copyright a {
   color: var(--primary-500);
 }
-.links {
-  display: flex;
-  gap: 5rem;
+/* links */
+@media only screen and (min-width: 600px) {
+  footer {
+    padding: 40px 0 28px 0;
+  }
+  .links {
+    display: flex;
+    gap: 4rem;
+  }
 }
-.links a {
-  color: white;
-  text-decoration: none;
+@media only screen and (min-width: 992px) {
+  .links {
+    display: flex;
+    gap: 5rem;
+  }
 }
 ul {
   display: flex;
@@ -109,9 +115,5 @@ p.label {
 .contact div {
   display: flex;
   gap: 8px;
-}
-a.email {
-  color: white;
-  text-decoration: none;
 }
 </style>

@@ -1,12 +1,12 @@
 <template>
-  <input type="text" :placeholder="placeholder"/>
+  <input type="text" :placeholder="placeholder" />
 </template>
 
 <script>
 export default {
   name: "Input",
-  props: [ "placeholder" ]
-}
+  props: ["placeholder"],
+};
 </script>
 
 <style>
@@ -16,6 +16,6 @@ input {
   padding: 0 1rem;
   border-radius: 0.5rem;
   width: -webkit-fill-available;
-  height: 40px;
+  height: 38px;
 }
 </style>

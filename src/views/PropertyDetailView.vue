@@ -61,13 +61,17 @@ import Thumbnail from "@/components/Thumbnail.vue";
 import { ref, computed, defineProps, onMounted } from "vue";
 
 const props = defineProps(["id"]);
-const prefix = "http://localhost:8000";
+const prefix = ref("");
 
 const data = ref({ id: props.id, images: [] });
 const isLoading = ref(true);
 
 onMounted(() => {
-  fetch(prefix + "/property/" + props.id)
+  prefix.value = process.env.VUE_APP_API_URL;
+});
+
+onMounted(() => {
+  fetch(prefix.value + "/property/" + props.id)
     .then((res) => res.json())
     .then((result) => {
       data.value = result;
@@ -117,10 +121,6 @@ section {
   background-color: #d9d9d9;
 }
 
-.content {
-  width: 754px;
-}
-
 .content > p {
   font-size: 18px;
 }
@@ -129,6 +129,7 @@ section {
   padding: 20px 145px;
   display: flex;
   gap: 20px;
+  justify-content: center;
 }
 
 .content {
@@ -136,6 +137,7 @@ section {
   flex-direction: column;
   gap: 8px;
   padding: 43px 0;
+  width: 754px;
 }
 
 .contact {
@@ -147,6 +149,7 @@ section {
 
 .listing-title {
   display: flex;
+  justify-content: space-between;
   align-items: end;
   gap: 8px;
 }

@@ -33,16 +33,48 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
 }
-.wrapper {
-  padding-left: 3.125rem;
-  padding-right: 3.125rem;
-  max-width: 1440px;
-  margin: auto;
-}
+
 .nav-border {
-  border: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
 }
+
 .footer-bg {
   background-color: var(--secondary-500);
+}
+
+.wrapper {
+  max-width: 1340px;
+  margin: auto;
+  height: fit-content;
+}
+@media only screen and (max-width: 600px) {
+  .wrapper {
+    padding-left: 18px;
+    padding-right: 18px;
+  }
+}
+@media only screen and (min-width: 600px) {
+  .wrapper {
+    padding-left: 18px;
+    padding-right: 18px;
+  }
+}
+@media only screen and (min-width: 768px) {
+  .wrapper {
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+}
+@media only screen and (min-width: 992px) {
+  .wrapper {
+    padding-left: 30px;
+    padding-right: 30px;
+  }
+}
+@media only screen and (min-width: 1200px) {
+  .wrapper {
+    padding-left: 50px;
+    padding-right: 50px;
+  }
 }
 </style>

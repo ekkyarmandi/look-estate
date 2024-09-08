@@ -82,7 +82,7 @@ const landSize = computed(() => {
 
 <style scoped>
 .listing-item {
-  width: 427px;
+  width: 100%;
   display: flex;
   flex-direction: column;
   gap: 1rem;
@@ -97,6 +97,7 @@ h2 {
   justify-content: space-between;
   color: var(--secondary-500);
   gap: 8px;
+  /* height: 50px; */
 }
 
 .title-wrapper a {

@@ -1,39 +1,22 @@
 <template>
-  <div class="thumbnail-container" :style="style">
+  <div class="thumbnail-container">
     <div class="images">
-      <img
-        :key="idx"
-        v-for="(img, idx) in thumbnails"
-        :class="'thumbnail-image ' + (activeIdx != idx && 'hidden')"
-        :data-index="activeIdx == idx ? 0 : -1"
-        :src="img"
-      />
+      <img :key="idx" v-for="(img, idx) in thumbnails" :class="'thumbnail-image ' + (activeIdx != idx && 'hidden')" :data-index="activeIdx == idx ? 0 : -1" :src="img" />
     </div>
-    <ul :class="'dots '+ dotsClass">
-      <li
-        :key="idx"
-        v-for:="(_, idx) in thumbnails"
-        :class="activeDot == idx ? 'dot active' : 'dot'"
-        @click="handleThumbnailChanges(idx, $event)"
-      ></li>
+    <ul :class="'dots ' + dotsClass">
+      <li :key="idx" v-for:="(_, idx) in thumbnails" :class="activeDot == idx ? 'dot active' : 'dot'" @click="handleThumbnailChanges(idx, $event)"></li>
     </ul>
     <div class="btn-container">
       <div class="btn-group">
-        <button
-          class="btn-circle"
-          @click="handleThumbnailChanges(activeIdx - 1, $event)"
-        >
+        <button class="btn-circle" @click="handleThumbnailChanges(activeIdx - 1, $event)">
           <LeftIcon />
         </button>
-        <button
-          class="btn-circle"
-          @click="handleThumbnailChanges(activeIdx + 1, $event)"
-        >
+        <button class="btn-circle" @click="handleThumbnailChanges(activeIdx + 1, $event)">
           <RightIcon />
         </button>
       </div>
     </div>
-    <slot/>
+    <slot />
   </div>
 </template>
 
@@ -80,7 +63,6 @@ const handleThumbnailChanges = (idx, event) => {
 </script>
 
 <style scoped>
-
 img {
   border-radius: 8px;
 }
