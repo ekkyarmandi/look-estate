@@ -1,0 +1,36 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
+
+:root {
+  --primary-500: #42b983;
+  --primary-600: #34a672;
+  --secondary-400: #89a7c3;
+  --secondary-500: #2c3e50;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px 0;
+  min-width: 200px;
+  border-radius: 12px;
+  background-color: white;
+  padding: 20px;
+}
+
+.dots {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 6px;
+  list-style: none;
+  cursor: pointer;
+}
+
+.dots.property {
+  bottom: 10%;
+}
+
+.dots.thumbnail {
+  bottom: 24%;
+}

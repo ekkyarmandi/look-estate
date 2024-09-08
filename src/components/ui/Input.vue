@@ -1,19 +1,21 @@
 <template>
-  <input class="" placeholder="Search" />
+  <input type="text" :placeholder="placeholder" />
 </template>
 
 <script>
 export default {
-  name: 'Input'
-}
+  name: "Input",
+  props: ["placeholder"],
+};
 </script>
 
-<style scoped>
+<style>
 input {
-  border: 1px solid #CCCCCC;
-  border-radius: 8px;
-  height: 40px;
-  width: 100%;
+  font-size: 1rem;
+  border: 1px solid #ccc;
   padding: 0 1rem;
+  border-radius: 0.5rem;
+  width: -webkit-fill-available;
+  height: 38px;
 }
 </style>

@@ -1,42 +1,53 @@
 <template>
-  <button type="button" :class="{ 'icon-only': iconOnly }" :style="buttonStyle">
-    <slot />
-  </button>
+  <button type="button" :class="btnClass"><slot /></button>
 </template>
 
 <script>
 export default {
   name: "Button",
-  props: ["iconOnly", "backgroundColor"],
+  props: ["class"],
   computed: {
-    buttonStyle() {
-      return {
-        backgroundColor: this.backgroundColor,
-        border: this.backgroundColor === "#fff" ? "1px solid #ccc" : "none",
-      };
+    btnClass() {
+      return this.class;
     },
   },
 };
 </script>
 
-<style scoped>
+<style>
 button {
-  height: 40px;
   width: 100px;
-  border-radius: 8px;
-  color: white;
-  font-weight: 600;
-  background: var(--primary-500);
-}
-button:hover {
-  background: var(--primary-600);
-}
-button.icon-only {
   height: 40px;
+  font-size: 1rem;
+  font-weight: bold;
+  border: 0;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+}
+.btn-primary {
+  background-color: var(--primary-500);
+  color: white;
+}
+.btn-primary:hover {
+  background-color: var(--primary-600);
+}
+.btn-light {
+  border: 1px solid #ccc;
+  background-color: white;
+}
+.box {
   width: 40px;
+  height: 40px;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-shrink: 0;
+}
+.w-full {
+  width: 100%;
 }
 </style>
