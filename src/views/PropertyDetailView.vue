@@ -121,30 +121,26 @@ section {
   background-color: #d9d9d9;
 }
 
-.content > p {
-  font-size: 18px;
-}
-
 .wrapper {
-  padding: 20px 145px;
-  display: flex;
+  padding: 20px;
   gap: 20px;
+  display: flex;
   justify-content: center;
+  max-width: 1440px;
 }
 
+/* Content */
 .content {
   display: flex;
   flex-direction: column;
   gap: 8px;
   padding: 43px 0;
-  width: 754px;
+  /* max-width: 747px; */
 }
 
-.contact {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  padding: 43px 0;
+
+.content > p {
+  font-size: 18px;
 }
 
 .listing-title {
@@ -185,6 +181,16 @@ section {
   gap: 8px;
 }
 
+/* Contact */
+.contact {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 43px 0;
+  /* max-width: 311px; */
+}
+
+/* Thumbnail Images */
 .image-container {
   display: flex;
   flex-direction: column;
@@ -223,7 +229,73 @@ section {
   width: 150px;
   height: 112.5px;
   object-fit: cover;
-  /* flex: 0 0 auto; */
   user-select: none;
+}
+
+
+@media screen and (max-width: 600px){
+  .listing-title, .wrapper, .content, .contact {
+    row-gap: 12px;
+  }
+  .listing-title {
+    display: flex;
+    flex-direction: column;
+  }
+  .wrapper {
+    display: flex;
+    flex-direction: column;
+  }
+  .content,.contact {
+    padding-top: 0; 
+    padding-bottom: 0; 
+  }
+  .image-container .image-options {
+    display: none;
+  }
+  .contact {
+    display: grid;
+  }
+  .contact form:first-child {
+    order: 2;
+  }
+  .contact form:nth-child(2) {
+    order: 1;
+  }
+}
+
+@media screen and (min-width: 600px){
+  .wrapper {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+  }
+  .content {
+    padding-top: 0; 
+    padding-bottom: 0; 
+  }
+  .contact {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    padding-top: 0; 
+    padding-bottom: 0; 
+  }
+}
+
+@media screen and (min-width: 992px){
+  .content {
+    max-width: 65%;
+  }
+  .contact {
+    width: 300px;
+  }
+}
+
+@media screen and (min-width: 1200px){
+  .content {
+    max-width: 747px;
+  }
+  .contact {
+    width: 320px;
+  }
 }
 </style>

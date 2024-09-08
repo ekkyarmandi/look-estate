@@ -1,5 +1,5 @@
 <template> 
-  <form id="getInTouch">
+  <form id="get-in-touch">
     <h2>Get In Touch</h2>
     <Input placeholder="Full Name" />
     <Input placeholder="Email"/>

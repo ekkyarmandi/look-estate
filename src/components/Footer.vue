@@ -118,10 +118,11 @@ p.label {
   .links {
     display: flex;
     flex-wrap: wrap;
+    justify-content: space-between;
     row-gap: 24px;
   }
   .links ul {
-    width: 150px;
+    width: 90px;
   }
 }
 @media only screen and (min-width: 600px) {

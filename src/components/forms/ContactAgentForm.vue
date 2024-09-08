@@ -51,4 +51,7 @@ a {
 p {
   font-size: 14px;
 }
+#contact-agent {
+  height: fit-content;
+}
 </style>

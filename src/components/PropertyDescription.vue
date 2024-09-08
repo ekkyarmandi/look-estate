@@ -27,4 +27,11 @@ h2 {
   font-size: 16px;
   line-height: 28px;
 }
+
+@media screen and (max-width: 600px){
+  h2 {
+    font-size: 20px;
+    margin-bottom: 1rem;
+  }
+}
 </style>

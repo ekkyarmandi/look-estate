@@ -60,6 +60,7 @@ const landSize = computed(() => data.land_size.toLocaleString("en-Us"));
   background-color: white;
   border-radius: 12px;
   padding: 28px;
+  flex-wrap: wrap;
 }
 .item {
   display: flex;
