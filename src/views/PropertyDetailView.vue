@@ -19,20 +19,9 @@
           </div>
         </div>
         <div class="image-container">
-          <Thumbnail :images="data.images" style="width: 754px;" dotsClass="property" />
-          <div
-            class="image-options"
-            ref="imageOptions"
-            @mousedown="onMouseDown"
-            @mousemove="onMouseMove"
-            @mouseup="onMouseUp"
-            @mouseleave="onMouseLeave"
-          >
-            <img
-              v-for:="img in data.images.slice(0, 15)"
-              :src="img"
-              :alt="'Thumbnail of ' + data.title"
-            />
+          <Thumbnail :images="data.images" style="width: 754px" dotsClass="property" />
+          <div class="image-options" ref="imageOptions" @mousedown="onMouseDown" @mousemove="onMouseMove" @mouseup="onMouseUp" @mouseleave="onMouseLeave">
+            <img v-for:="img in data.images.slice(0, 15)" :src="img" :alt="'Thumbnail of ' + data.title" />
           </div>
         </div>
         <PropertyDetail :data="data" />
@@ -113,7 +102,6 @@ function onMouseUp() {
 function onMouseLeave() {
   isDragging.value = false;
 }
-
 </script>
 
 <style scoped>
@@ -135,9 +123,7 @@ section {
   flex-direction: column;
   gap: 8px;
   padding: 43px 0;
-  /* max-width: 747px; */
 }
-
 
 .content > p {
   font-size: 18px;
@@ -187,7 +173,6 @@ section {
   flex-direction: column;
   gap: 20px;
   padding: 43px 0;
-  /* max-width: 311px; */
 }
 
 /* Thumbnail Images */
@@ -232,9 +217,11 @@ section {
   user-select: none;
 }
 
-
-@media screen and (max-width: 600px){
-  .listing-title, .wrapper, .content, .contact {
+@media screen and (max-width: 600px) {
+  .listing-title,
+  .wrapper,
+  .content,
+  .contact {
     row-gap: 12px;
   }
   .listing-title {
@@ -245,9 +232,10 @@ section {
     display: flex;
     flex-direction: column;
   }
-  .content,.contact {
-    padding-top: 0; 
-    padding-bottom: 0; 
+  .content,
+  .contact {
+    padding-top: 0;
+    padding-bottom: 0;
   }
   .image-container .image-options {
     display: none;
@@ -263,34 +251,42 @@ section {
   }
 }
 
-@media screen and (min-width: 600px){
+@media screen and (min-width: 600px) {
   .wrapper {
     display: flex;
     flex-direction: column;
     padding: 20px;
   }
   .content {
-    padding-top: 0; 
-    padding-bottom: 0; 
+    padding-top: 0;
+    padding-bottom: 0;
   }
   .contact {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    padding-top: 0; 
-    padding-bottom: 0; 
+    padding-top: 0;
+    padding-bottom: 0;
   }
 }
 
-@media screen and (min-width: 992px){
+@media screen and (min-width: 992px) {
+  .wrapper {
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+  }
   .content {
     max-width: 65%;
   }
   .contact {
     width: 300px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
   }
 }
 
-@media screen and (min-width: 1200px){
+@media screen and (min-width: 1200px) {
   .content {
     max-width: 747px;
   }
