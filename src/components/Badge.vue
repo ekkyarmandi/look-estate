@@ -1,11 +1,11 @@
 <template>
-  <div><slot/></div>
+  <div><slot /></div>
 </template>
 
 <script>
 export default {
   name: "Badge",
-}
+};
 </script>
 
 <style scoped>
@@ -17,5 +17,7 @@ div {
   border-radius: 8px;
   width: fit-content;
   color: var(--secondary-500);
+  cursor: default;
+  user-select: none;
 }
 </style>

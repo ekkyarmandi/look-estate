@@ -21,24 +21,28 @@
         <p>{{ data.id }}</p>
       </Badge>
       <Badge>
-        <BedIcon />
-        <p>{{ data.bedrooms }}</p>
-      </Badge>
-      <Badge>
-        <BathIcon />
-        <p>{{ data.bathrooms }}</p>
-      </Badge>
-      <Badge>
-        <BuildingIcon />
-        <p>{{ buildingSize }} sqm</p>
-      </Badge>
-      <Badge>
-        <AreaIcon />
-        <p>{{ landSize }} sqm</p>
+        <HouseIcon />
+        <p>{{ data.property_type }}</p>
       </Badge>
       <Badge>
         <ScriptIcon />
         <p>{{ data.hold_type }}</p>
+      </Badge>
+      <Badge v-if:="!noBedroom">
+        <BedIcon />
+        <p>{{ data.bedrooms }}</p>
+      </Badge>
+      <Badge v-if:="!noBathroom">
+        <BathIcon />
+        <p>{{ data.bathrooms }}</p>
+      </Badge>
+      <Badge v-if:="!noBuildSize">
+        <BuildingIcon />
+        <p>{{ buildingSize }} sqm</p>
+      </Badge>
+      <Badge v-if:="!noLandSize">
+        <AreaIcon />
+        <p>{{ landSize }} sqm</p>
       </Badge>
     </div>
   </div>
@@ -57,6 +61,7 @@ import LeftIcon from "@/assets/icons/LeftIcon.vue";
 import RightIcon from "@/assets/icons/RightIcon.vue";
 import LocationIcon from "@/assets/icons/LocationIcon.vue";
 import HearthIcon from "@/assets/icons/HearthIcon.vue";
+import HouseIcon from "@/assets/icons/HouseIcon.vue";
 
 import { computed, defineProps } from "vue";
 
@@ -77,6 +82,22 @@ const buildingSize = computed(() => {
 
 const landSize = computed(() => {
   return data.land_size.toLocaleString("en-US");
+});
+
+const noBedroom = computed(() => {
+  return !data.bedrooms;
+});
+
+const noBathroom = computed(() => {
+  return !data.bathrooms;
+});
+
+const noBuildSize = computed(() => {
+  return !data.build_size;
+});
+
+const noLandSize = computed(() => {
+  return !data.land_size;
 });
 </script>
 
