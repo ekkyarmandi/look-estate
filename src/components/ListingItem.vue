@@ -1,6 +1,6 @@
 <template>
   <div class="listing-item">
-    <Thumbnail :images="data.images" style="width: 427px" dotsClass="thumbnail">
+    <Thumbnail :images="data.images" dotsClass="thumbnail">
       <div class="listing-location">
         <LocationIcon color="white" />
         <p>{{ data.location }}</p>
@@ -17,16 +17,12 @@
     </div>
     <div class="badges">
       <Badge>
-        <HashIcon />
-        <p>{{ data.id }}</p>
+        <ScriptIcon />
+        <p>{{ data.hold_type }}</p>
       </Badge>
       <Badge>
         <HouseIcon />
         <p>{{ data.property_type }}</p>
-      </Badge>
-      <Badge>
-        <ScriptIcon />
-        <p>{{ data.hold_type }}</p>
       </Badge>
       <Badge v-if:="!noBedroom">
         <BedIcon />

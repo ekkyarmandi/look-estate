@@ -10,7 +10,7 @@
     </div>
     <div class="menu">
       <HearthIcon />
-      <Button class="btn-primary">Join Us</Button>
+      <Button class="btn-primary p-lg">Join Us</Button>
       <p>or</p>
       <p class="btn">Login</p>
     </div>
@@ -41,6 +41,9 @@ nav {
   gap: 12px;
   padding-top: 12px;
   padding-bottom: 12px;
+}
+.p-lg {
+  padding: 0 20px;
 }
 .menu,
 .burger-menu {

@@ -139,6 +139,15 @@ img {
   height: 2.5rem;
   border-radius: 100%;
   background-color: #ffffff50;
+  border: 0;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.btn-circle svg {
+  opacity: 50%;
 }
 
 .btn-circle:hover {

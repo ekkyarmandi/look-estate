@@ -1,6 +1,6 @@
 <template>
   <section>
-    <div v-if:="isLoading" class="wrapper">Loading</div>
+    <div v-if:="isLoading" class="wrapper"><LoadingSpinner/></div>
     <div v-if:="!isLoading" class="wrapper">
       <div class="content">
         <p>ID: {{ data.id }}</p>
@@ -46,6 +46,7 @@ import ShareIcon from "@/assets/icons/ShareIcon.vue";
 import LeftIcon from "@/assets/icons/LeftIcon.vue";
 import RightIcon from "@/assets/icons/RightIcon.vue";
 import Thumbnail from "@/components/Thumbnail.vue";
+import LoadingSpinner from "@/components/LoadingSpinner.vue";
 
 import { ref, computed, defineProps, onMounted } from "vue";
 

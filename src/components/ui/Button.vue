@@ -1,23 +1,22 @@
 <template>
-  <button type="button" :class="btnClass"><slot /></button>
+  <button type="button" :class="customClass" @click="$emit('click')"><slot /></button>
 </template>
 
-<script>
-export default {
-  name: "Button",
-  props: ["class"],
-  computed: {
-    btnClass() {
-      return this.class;
-    },
-  },
-};
+<script setup>
+import { computed, defineProps, defineEmits } from "vue";
+
+const props = defineProps(["class"]);
+const emit = defineEmits(["click"]);
+
+const customClass = computed(() => {
+  return props.class;
+});
 </script>
 
 <style>
 button {
-  width: 100px;
-  height: 40px;
+  min-width: 40px;
+  min-height: 40px;
   font-size: 1rem;
   font-weight: bold;
   border: 0;

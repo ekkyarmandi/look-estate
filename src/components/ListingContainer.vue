@@ -1,25 +1,33 @@
 <template>
   <div class="wrapper listing-container">
-    <ResultFound :total="resultFound"/>
-    <div v-if:="isLoading">Loading</div>
-    <ul v-if:="!isLoading">
+    <ResultFound :total="resultFound" />
+    <ul ref="listingContainer">
       <li v-for:="item in items">
         <ListingItem :data="item" :key="item.id" />
       </li>
     </ul>
-    <l-dot-pulse size="43" speed="1.3" color="#42b983"></l-dot-pulse>
+    <div class="loading">
+      <div v-if:="isLoading"><LoadingSpinner/></div>
+      <Button v-else: class="btn-primary w-lg" @click="loadMore">Load More</Button>
+    </div>
   </div>
 </template>
 
 <script setup>
-import { ref, computed, onMounted, watch } from "vue";
+import { ref, computed, onMounted, onUnmounted, watch } from "vue";
+
+import LoadingSpinner from "@/components/LoadingSpinner.vue";
 import ListingItem from "@/components/ListingItem.vue";
 import ResultFound from "@/components/ResultFound.vue";
+import Button from "@/components/ui/Button.vue";
 
 const items = ref([]);
 const isLoading = ref(true);
 const prefix = ref("");
 const total = ref(0);
+const page = ref(1);
+
+const listingContainer = ref(null);
 
 onMounted(() => {
   prefix.value = process.env.VUE_APP_API_URL;
@@ -30,27 +38,51 @@ onMounted(() => {
   fetch(url)
     .then((res) => res.json())
     .then((data) => {
-      items.value.push(...data);
+      items.value.push(...data.results);
       isLoading.value = false;
-      total.value += data.length;
+      total.value = data.total;
     });
 });
 
-const resultFound = computed(()=>{
+const resultFound = computed(() => {
   return total.value.toLocaleString();
 });
 
+const loadMore = () => {
+  isLoading.value = true;
+  page.value += 1;
+  const url = prefix.value + "/properties?page=" + page.value;
+  fetch(url)
+    .then((res) => res.json())
+    .then((data) => {
+      items.value.push(...data.results);
+      isLoading.value = false;
+    })
+    .catch((err) => {
+      console.log(err);
+      isLoading.value = false;
+      // TODO: show notification to user
+    });
+};
 </script>
 
 <style scoped>
+.loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100px;
+}
 .listing-container {
-  margin-bottom: 40px;
   height: 100%;
 }
 ul {
   justify-content: space-between;
   width: 100%;
   list-style-type: none;
+}
+.w-lg {
+  padding: 0px 20px;
 }
 @media only screen and (max-width: 600px) {
   ul {
