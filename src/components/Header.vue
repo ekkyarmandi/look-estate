@@ -32,11 +32,12 @@ import BurgerMenuIcon from "@/assets/icons/BurgerMenuIcon.vue";
 import FilterIcon from "@/assets/icons/FilterIcon.vue";
 import HearthIcon from "@/assets/icons/HearthIcon.vue";
 
-import { ref, onMounted, defineProps } from "vue";
+import { ref, onMounted, defineProps, watch } from "vue";
 import { useRoute } from "vue-router";
 
 const router = useRoute();
-const query = ref("");
+
+const query = ref(router.query.q || "");
 const prefixUrl = ref("");
 
 function searchProperties(e){
@@ -45,8 +46,12 @@ function searchProperties(e){
 
 onMounted(()=>{
   prefixUrl.value = process.env.VUE_APP_API_URL;
-  query.value = router.query.q || "";
 });
+
+// watch the router query change
+watch(() => router.query.q, (newId, oldId) => {
+  query.value = router.query.q;
+})
 
 </script>
 
