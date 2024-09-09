@@ -1,24 +1,14 @@
 <template>
-  <!-- <router-link to="/">Home</router-link> -->
   <Copyright />
-  <div class="nav-border"><Header /></div>
+  <div class="nav-border"><Header/></div>
   <router-view />
-  <div class="footer-bg"><Footer /></div>
+  <div class="footer-bg"><Footer/></div>
 </template>
 
-<script>
+<script setup>
 import Header from "@/components/Header.vue";
 import Copyright from "@/components/Copyright.vue";
 import Footer from "@/components/Footer.vue";
-
-export default {
-  name: "App",
-  components: {
-    Header,
-    Copyright,
-    Footer,
-  },
-};
 </script>
 
 <style src="./assets/global.css"></style>

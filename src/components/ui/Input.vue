@@ -1,12 +1,14 @@
 <template>
-  <input type="text" :placeholder="placeholder" />
+  <input @change.prevent="$emit('change', $event)" :value="value" type="text" :placeholder="placeholder" />
 </template>
 
-<script>
-export default {
-  name: "Input",
-  props: ["placeholder"],
-};
+<script setup>
+
+import { defineProps,defineEmits } from "vue";
+
+const { placeholder,value } = defineProps(["placeholder","value"]);
+const emit = defineEmits(["change"]);
+
 </script>
 
 <style>

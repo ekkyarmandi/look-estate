@@ -1,6 +1,6 @@
 <template>
   <section>
-    <div v-if:="isLoading" class="wrapper"><LoadingSpinner/></div>
+    <div v-if:="isLoading" class="wrapper"><LoadingSpinner /></div>
     <div v-if:="!isLoading" class="wrapper">
       <div class="content">
         <p>ID: {{ data.id }}</p>

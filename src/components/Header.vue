@@ -4,9 +4,9 @@
       <Logo />
     </a>
     <div class="search">
-      <Input placeholder="Search" />
-      <Button class="box btn-primary"><SearchIcon /></Button>
-      <Button class="box btn-light"><FilterIcon /></Button>
+      <Input placeholder="Search" :value="query" @change="searchProperties" />
+      <Button class="box btn-primary"><SearchIcon/></Button>
+      <Button class="box btn-light"><FilterIcon/></Button>
     </div>
     <div class="menu">
       <HearthIcon />
@@ -31,6 +31,23 @@ import SearchIcon from "@/assets/icons/SearchIcon.vue";
 import BurgerMenuIcon from "@/assets/icons/BurgerMenuIcon.vue";
 import FilterIcon from "@/assets/icons/FilterIcon.vue";
 import HearthIcon from "@/assets/icons/HearthIcon.vue";
+
+import { ref, onMounted, defineProps } from "vue";
+import { useRoute } from "vue-router";
+
+const router = useRoute();
+const query = ref("");
+const prefixUrl = ref("");
+
+function searchProperties(e){
+    window.location = "/?q=" + e.target.value;
+}
+
+onMounted(()=>{
+  prefixUrl.value = process.env.VUE_APP_API_URL;
+  query.value = router.query.q || "";
+});
+
 </script>
 
 <style scoped>

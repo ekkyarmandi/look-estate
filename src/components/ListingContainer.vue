@@ -7,26 +7,28 @@
       </li>
     </ul>
     <div class="loading">
-      <div v-if:="isLoading"><LoadingSpinner/></div>
+      <div v-if:="isLoading"><LoadingSpinner /></div>
       <Button v-else: class="btn-primary w-lg" @click="loadMore">Load More</Button>
     </div>
   </div>
 </template>
 
 <script setup>
-import { ref, computed, onMounted, onUnmounted, watch } from "vue";
+import { ref, computed, onMounted } from "vue";
+import { useRoute } from "vue-router";
 
 import LoadingSpinner from "@/components/LoadingSpinner.vue";
 import ListingItem from "@/components/ListingItem.vue";
 import ResultFound from "@/components/ResultFound.vue";
 import Button from "@/components/ui/Button.vue";
 
+const router = useRoute();
+
 const items = ref([]);
 const isLoading = ref(true);
 const prefix = ref("");
 const total = ref(0);
 const page = ref(1);
-
 const listingContainer = ref(null);
 
 onMounted(() => {
@@ -34,7 +36,10 @@ onMounted(() => {
 });
 
 onMounted(() => {
-  const url = prefix.value + "/properties";
+  var url = prefix.value + "/properties";
+  if (router.query.q) {
+    url = prefix.value + "/properties?q=" + router.query.q;
+  }
   fetch(url)
     .then((res) => res.json())
     .then((data) => {
