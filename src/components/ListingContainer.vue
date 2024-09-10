@@ -2,9 +2,10 @@
   <div class="wrapper listing-container">
     <ResultFound :total="resultFound" />
     <ul ref="listingContainer">
-      <li v-for:="item in items">
+      <li v-if:="items.length > 0" v-for:="item in items">
         <ListingItem :data="item" :key="item.id" />
       </li>
+      <ListingSkeleton v-else: />
     </ul>
     <div class="loading">
       <div v-if:="isLoading"><LoadingSpinner /></div>
@@ -18,6 +19,7 @@ import { ref, computed, onMounted } from "vue";
 import { useRoute } from "vue-router";
 
 import LoadingSpinner from "@/components/LoadingSpinner.vue";
+import ListingSkeleton from "@/components/ListingSkeleton.vue";
 import ListingItem from "@/components/ListingItem.vue";
 import ResultFound from "@/components/ResultFound.vue";
 import Button from "@/components/ui/Button.vue";
