@@ -7,28 +7,28 @@
       </div>
       <p class="attribute-title">Contract Type</p>
     </div>
-    <div class="attribute-item">
+    <div v-if:="!noBedrooms" class="attribute-item">
       <div class="item">
         <BedIcon />
         <p class="value">{{ data.bedrooms }}</p>
       </div>
       <p class="attribute-title">Bedrooms</p>
     </div>
-    <div class="attribute-item">
+    <div v-if:="!noBathrooms" class="attribute-item">
       <div class="item">
         <BathIcon />
         <p class="value">{{ data.bathrooms }}</p>
       </div>
       <p class="attribute-title">Bathrooms</p>
     </div>
-    <div class="attribute-item">
+    <div v-if:="!noLandSize" class="attribute-item">
       <div class="item">
         <AreaIcon />
         <p class="value">{{ landSize }} <span>sqm</span></p>
       </div>
       <p class="attribute-title">Land Size</p>
     </div>
-    <div class="attribute-item">
+    <div v-if:="!noBuildSize" class="attribute-item">
       <div class="item">
         <BuildingIcon />
         <p class="value">{{ buildSize }} <span>sqm</span></p>
@@ -50,6 +50,23 @@ import { computed, defineProps } from "vue";
 const { data } = defineProps(["data"]);
 const buildSize = computed(() => data.build_size.toLocaleString("en-Us"));
 const landSize = computed(() => data.land_size.toLocaleString("en-Us"));
+
+const noBuildSize = computed(()=>{
+  return !data.build_size;
+});
+
+const noLandSize = computed(()=>{
+  return !data.land_size;
+});
+
+const noBedrooms = computed(()=>{
+  return !data.bedrooms;
+});
+
+const noBathrooms = computed(()=>{
+  return !data.bathrooms;
+});
+
 </script>
 
 <style scoped>
