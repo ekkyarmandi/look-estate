@@ -6,7 +6,7 @@
         <p>{{ data.location }}</p>
       </div>
       <div class="btn-like">
-        <HearthIcon :hideNumber="true" color="white" />
+        <BookmarkIcon :hideNumber="true" color="white" />
       </div>
     </Thumbnail>
     <div class="title-wrapper">
@@ -56,7 +56,7 @@ import ScriptIcon from "@/assets/icons/ScriptIcon.vue";
 import LeftIcon from "@/assets/icons/LeftIcon.vue";
 import RightIcon from "@/assets/icons/RightIcon.vue";
 import LocationIcon from "@/assets/icons/LocationIcon.vue";
-import HearthIcon from "@/assets/icons/HearthIcon.vue";
+import BookmarkIcon from "@/assets/icons/BookmarkIcon.vue";
 import HouseIcon from "@/assets/icons/HouseIcon.vue";
 
 import { computed, defineProps } from "vue";

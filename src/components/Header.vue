@@ -9,7 +9,7 @@
       <Button class="box btn-light"><FilterIcon/></Button>
     </div>
     <div class="menu">
-      <HearthIcon />
+      <BookmarkIcon />
       <Button class="btn-primary p-lg">Join Us</Button>
       <p>or</p>
       <p class="btn">Login</p>
@@ -30,7 +30,7 @@ import Logo from "@/assets/icons/Logo.vue";
 import SearchIcon from "@/assets/icons/SearchIcon.vue";
 import BurgerMenuIcon from "@/assets/icons/BurgerMenuIcon.vue";
 import FilterIcon from "@/assets/icons/FilterIcon.vue";
-import HearthIcon from "@/assets/icons/HearthIcon.vue";
+import BookmarkIcon from "@/assets/icons/BookmarkIcon.vue";
 
 import { ref, onMounted, defineProps, watch } from "vue";
 import { useRoute } from "vue-router";

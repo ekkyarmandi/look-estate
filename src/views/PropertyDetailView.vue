@@ -14,7 +14,7 @@
             <p>{{ data.location }}</p>
           </div>
           <div class="btns">
-            <Button class="box"><HearthIcon hideNumber="true" /></Button>
+            <Button class="box" @click="bookmark"><BookmarkIcon hideNumber="true" /></Button>
             <Button class="box btn-primary"><ShareIcon /></Button>
           </div>
         </div>
@@ -40,7 +40,7 @@ import GetInTouchForm from "@/components/forms/GetInTouchForm.vue";
 import ContactAgentForm from "@/components/forms/ContactAgentForm.vue";
 import PropertyDetail from "@/components/PropertyDetail.vue";
 import PropertyDescription from "@/components/PropertyDescription.vue";
-import HearthIcon from "@/assets/icons/HearthIcon.vue";
+import BookmarkIcon from "@/assets/icons/BookmarkIcon.vue";
 import LocationIcon from "@/assets/icons/LocationIcon.vue";
 import ShareIcon from "@/assets/icons/ShareIcon.vue";
 import LeftIcon from "@/assets/icons/LeftIcon.vue";
@@ -55,6 +55,10 @@ const prefix = ref("");
 
 const data = ref({ id: props.id, images: [] });
 const isLoading = ref(true);
+
+function bookmark(){
+  console.log("clicked");
+}
 
 onMounted(() => {
   prefix.value = process.env.VUE_APP_API_URL;
