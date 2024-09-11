@@ -1,5 +1,5 @@
 <template>
-  <div v-for="item in items" class="skeleton-body">
+  <div v-for:="item in items" class="skeleton-body">
     <div class="skeleton skeleton-thumbnail"></div>
     <div class="skeleton skeleton-text"></div>
     <div class="skeleton skeleton-text second"></div>
@@ -7,12 +7,12 @@
 </template>
 
 <script setup>
-const items = [0,1,2,3,4,5];
+const items = [0, 1, 2, 3, 4, 5];
 </script>
 
 <style scoped>
 .skeleton-body {
-  width: 400px;
+  min-width: 375px;
   display: flex;
   gap: 12px;
   flex-direction: column;
@@ -46,13 +46,7 @@ const items = [0,1,2,3,4,5];
   bottom: 0;
   left: 0;
   transform: translateX(-100%);
-  background-image: linear-gradient(
-    90deg,
-    rgba(255, 255, 255, 0) 0,
-    rgba(255, 255, 255, 0.2) 20%,
-    rgba(255, 255, 255, 0.5) 60%,
-    rgba(255, 255, 255, 0)
-  );
+  background-image: linear-gradient(90deg, rgba(255, 255, 255, 0) 0, rgba(255, 255, 255, 0.2) 20%, rgba(255, 255, 255, 0.5) 60%, rgba(255, 255, 255, 0));
   animation: shimmer 2s infinite;
 }
 

@@ -61,8 +61,6 @@ const { bookmarked } = storeToRefs(bookmarkStore);
 const data = ref({ id: props.id, images: [] });
 const isLoading = ref(true);
 
-const isBookmarked = computed(() => bookmarked.value.includes(data.value.id));
-
 useHead({
   title: `Property ID: ${props.id} | Look Estate`,
   meta: [
@@ -73,11 +71,13 @@ useHead({
   ],
 });
 
+const isBookmarked = computed(() => bookmarked.value.includes(data.value));
+
 function toggleBookmark() {
-  if (bookmarked.value.includes(data.value.id)) {
-    bookmarkStore.removeBookmark(data.value.id);
+  if (bookmarked.value.includes(data.value)) {
+    bookmarkStore.removeBookmark(data.value);
   } else {
-    bookmarkStore.addBookmark(data.value.id);
+    bookmarkStore.addBookmark(data.value);
   }
 }
 

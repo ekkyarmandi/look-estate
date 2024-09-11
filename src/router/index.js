@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from "vue-router";
 import ListingContainer from "@/components/ListingContainer.vue";
 import PropertyDetailView from "../views/PropertyDetailView.vue";
+import BookmarkView from "../views/BookmarkView.vue";
 
 const routes = [
   {
@@ -13,6 +14,11 @@ const routes = [
     name: "PropertyDetail",
     component: PropertyDetailView,
     props: true,
+  },
+  {
+    path: "/bookmarks",
+    name: "Bookmarks",
+    component: BookmarkView,
   },
 ];
 

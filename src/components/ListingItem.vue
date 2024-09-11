@@ -101,14 +101,14 @@ const noLandSize = computed(() => {
 });
 
 const isBookmarked = computed(() => {
-  return bookmarked.value.includes(data.id);
+  return bookmarked.value.includes(data);
 });
 
 function toggleBookmark() {
-  if (!bookmarked.value.includes(data.id)) {
-    bookmarkStore.addBookmark(data.id);
+  if (bookmarked.value.includes(data)) {
+    bookmarkStore.removeBookmark(data);
   } else {
-    bookmarkStore.removeBookmark(data.id);
+    bookmarkStore.addBookmark(data);
   }
 }
 </script>

@@ -9,7 +9,7 @@
       <Button class="box btn-light"><FilterIcon /></Button>
     </div>
     <div class="menu">
-      <BookmarkIcon />
+      <router-link to="/bookmarks"><BookmarkIcon /></router-link>
       <Button class="btn-primary p-lg">Join Us</Button>
       <p>or</p>
       <p class="btn">Login</p>

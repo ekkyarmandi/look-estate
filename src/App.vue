@@ -1,8 +1,8 @@
 <template>
   <Copyright />
-  <div class="nav-border"><Header/></div>
+  <div class="nav-border"><Header /></div>
   <router-view />
-  <div class="footer-bg"><Footer/></div>
+  <div ref="footer" class="footer-bg"><Footer /></div>
 </template>
 
 <script setup>
@@ -22,6 +22,7 @@ import Footer from "@/components/Footer.vue";
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
+  min-height: 100vh;
 }
 
 .nav-border {
@@ -30,6 +31,12 @@ import Footer from "@/components/Footer.vue";
 
 .footer-bg {
   background-color: var(--secondary-500);
+}
+
+.fixed-bottom {
+  width: 100%;
+  position: absolute;
+  bottom: 0;
 }
 
 .wrapper {
