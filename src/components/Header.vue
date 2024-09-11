@@ -5,8 +5,8 @@
     </a>
     <div class="search">
       <Input placeholder="Search" :value="query" @change="searchProperties" />
-      <Button class="box btn-primary"><SearchIcon/></Button>
-      <Button class="box btn-light"><FilterIcon/></Button>
+      <Button class="box btn-primary" @click="searchProperties"><SearchIcon /></Button>
+      <Button class="box btn-light"><FilterIcon /></Button>
     </div>
     <div class="menu">
       <BookmarkIcon />
@@ -40,19 +40,21 @@ const router = useRoute();
 const query = ref(router.query.q || "");
 const prefixUrl = ref("");
 
-function searchProperties(e){
-    window.location = "/?q=" + e.target.value;
+function searchProperties(e) {
+  window.location = "/?q=" + e.target.value;
 }
 
-onMounted(()=>{
+onMounted(() => {
   prefixUrl.value = process.env.VUE_APP_API_URL;
 });
 
 // watch the router query change
-watch(() => router.query.q, (newId, oldId) => {
-  query.value = router.query.q;
-})
-
+watch(
+  () => router.query.q,
+  (newId, oldId) => {
+    query.value = router.query.q;
+  }
+);
 </script>
 
 <style scoped>
