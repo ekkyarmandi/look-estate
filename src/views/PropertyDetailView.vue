@@ -14,7 +14,7 @@
             <p>{{ data.location }}</p>
           </div>
           <div class="btns">
-            <Button class="box" @click="bookmark"><BookmarkIcon hideNumber="true" /></Button>
+            <Button class="box" @click="toggleBookmark"><BookmarkIcon hideNumber="true" :color="isBookmarked ? '#42b983' : '#2c3e50'" :fill="isBookmarked ? '#42b983' : 'none'" /></Button>
             <Button class="box btn-primary"><ShareIcon /></Button>
           </div>
         </div>
@@ -49,13 +49,19 @@ import Thumbnail from "@/components/Thumbnail.vue";
 import LoadingSpinner from "@/components/LoadingSpinner.vue";
 
 import { ref, computed, defineProps, onMounted } from "vue";
+import { useBookmarkStore } from "@/store/bookmark";
+import { storeToRefs } from "pinia";
 import { useHead } from "@unhead/vue";
 
 const props = defineProps(["id"]);
 const prefix = ref("");
+const bookmarkStore = useBookmarkStore();
+const { bookmarked } = storeToRefs(bookmarkStore);
 
 const data = ref({ id: props.id, images: [] });
 const isLoading = ref(true);
+
+const isBookmarked = computed(() => bookmarked.value.includes(data.value.id));
 
 useHead({
   title: `Property ID: ${props.id} | Look Estate`,
@@ -67,8 +73,12 @@ useHead({
   ],
 });
 
-function bookmark() {
-  console.log("clicked");
+function toggleBookmark() {
+  if (bookmarked.value.includes(data.value.id)) {
+    bookmarkStore.removeBookmark(data.value.id);
+  } else {
+    bookmarkStore.addBookmark(data.value.id);
+  }
 }
 
 onMounted(() => {
