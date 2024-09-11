@@ -49,6 +49,7 @@ import Thumbnail from "@/components/Thumbnail.vue";
 import LoadingSpinner from "@/components/LoadingSpinner.vue";
 
 import { ref, computed, defineProps, onMounted } from "vue";
+import { useHead } from "@unhead/vue";
 
 const props = defineProps(["id"]);
 const prefix = ref("");
@@ -56,7 +57,17 @@ const prefix = ref("");
 const data = ref({ id: props.id, images: [] });
 const isLoading = ref(true);
 
-function bookmark(){
+useHead({
+  title: `Property ID: ${props.id} | Look Estate`,
+  meta: [
+    {
+      name: "description",
+      content: "Property listing websites",
+    },
+  ],
+});
+
+function bookmark() {
   console.log("clicked");
 }
 

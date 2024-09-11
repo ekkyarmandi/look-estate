@@ -23,6 +23,17 @@ import ListingSkeleton from "@/components/ListingSkeleton.vue";
 import ListingItem from "@/components/ListingItem.vue";
 import ResultFound from "@/components/ResultFound.vue";
 import Button from "@/components/ui/Button.vue";
+import { useHead } from "@unhead/vue";
+
+useHead({
+  title: "Home Page | Look Estate",
+  meta: [
+    {
+      name: "description",
+      content: "Property listing websites",
+    },
+  ],
+});
 
 const router = useRoute();
 
