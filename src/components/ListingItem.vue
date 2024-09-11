@@ -5,8 +5,8 @@
         <LocationIcon color="white" />
         <p>{{ data.location }}</p>
       </div>
-      <div class="btn-like">
-        <BookmarkIcon :hideNumber="true" color="white" />
+      <div class="btn-like" @click="toggleBookmark">
+        <BookmarkIcon :hideNumber="true" :color="isBookmarked ? '#42b983' : 'white'" :fill="isBookmarked ? '#42b983' : 'none'" />
       </div>
     </Thumbnail>
     <div class="title-wrapper">
@@ -58,10 +58,14 @@ import RightIcon from "@/assets/icons/RightIcon.vue";
 import LocationIcon from "@/assets/icons/LocationIcon.vue";
 import BookmarkIcon from "@/assets/icons/BookmarkIcon.vue";
 import HouseIcon from "@/assets/icons/HouseIcon.vue";
+import { useBookmarkStore } from "@/store/bookmark";
+import { storeToRefs } from "pinia";
 
 import { computed, defineProps } from "vue";
 
 const { data } = defineProps(["data"]);
+const bookmarkStore = useBookmarkStore();
+const { bookmarked } = storeToRefs(bookmarkStore);
 
 const priceUsd = computed(() => {
   return data.price
@@ -95,6 +99,18 @@ const noBuildSize = computed(() => {
 const noLandSize = computed(() => {
   return !data.land_size;
 });
+
+const isBookmarked = computed(() => {
+  return bookmarked.value.includes(data.id);
+});
+
+function toggleBookmark() {
+  if (!bookmarked.value.includes(data.id)) {
+    bookmarkStore.addBookmark(data.id);
+  } else {
+    bookmarkStore.removeBookmark(data.id);
+  }
+}
 </script>
 
 <style scoped>
