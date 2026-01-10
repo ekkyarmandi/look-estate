@@ -59,8 +59,7 @@ const total = ref(0);
 const page = ref(1);
 const listingContainer = ref(null);
 
-const prefix =
-  (typeof process !== "undefined" && process.env.VUE_APP_API_URL) || "";
+const prefix = process.env.VUE_APP_API_URL;
 
 const fetchItems = async (isLoadMore = false) => {
   if (!isLoadMore) {
