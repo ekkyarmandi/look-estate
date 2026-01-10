@@ -1,15 +1,15 @@
 <template>
   <div class="wrapper listing-container">
-    <div v-if:="bookmarked.length == 0" class="">
+    <div v-if="bookmarked.length == 0" class="">
       <p class="empty-text">No Bookmark</p>
     </div>
-    <ul v-else: ref="listingContainer">
-      <li v-for:="item in bookmarked">
-        <ListingItem :data="item" :key="item.id" />
-      </li>
-    </ul>
-  </div>
-</template>
+    <ul v-else ref="listingContainer">
+      <li v-for="item in bookmarked" :key="item.id">
+         <ListingItem :data="item" />
+       </li>
+     </ul>
+   </div>
+ </template>
 
 <script setup>
 import ListingItem from "@/components/ListingItem.vue";
@@ -18,6 +18,10 @@ import { storeToRefs } from "pinia";
 
 const bookmarkStore = useBookmarkStore();
 const { bookmarked } = storeToRefs(bookmarkStore);
+
+// template ref
+import { ref } from "vue";
+const listingContainer = ref(null);
 </script>
 
 <style scoped>

@@ -8,6 +8,6 @@
 
 <script>
 export default {
-  name: "Logo",
+  name: "AppLogo",
 }
 </script>

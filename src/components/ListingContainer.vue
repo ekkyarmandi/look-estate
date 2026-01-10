@@ -1,29 +1,47 @@
 <template>
   <div class="wrapper listing-container">
-    <ResultFound :total="resultFound" />
-    <ul ref="listingContainer">
-      <li v-if:="items.length > 0" v-for:="item in items">
-        <ListingItem :data="item" :key="item.id" />
-      </li>
-      <ListingSkeleton v-else: />
-    </ul>
-    <div class="loading">
-      <div v-if:="isLoading"><LoadingSpinner /></div>
-      <Button v-else: class="btn-primary w-lg" @click="loadMore">Load More</Button>
+    <ResultFound v-if="items.length > 0" :total="resultFound" />
+
+    <div v-if="isLoading" class="skeleton-grid">
+      <div v-for="i in 6" :key="i" class="skeleton-item">
+        <ListingSkeleton />
+      </div>
+    </div>
+
+    <template v-else>
+      <ul ref="listingContainer" v-if="items.length > 0">
+        <li v-for="item in items" :key="item.id">
+          <ListingItem :data="item" />
+        </li>
+      </ul>
+      <EmptyState v-else />
+    </template>
+
+    <div class="loading" v-if="items.length > 0">
+      <div v-if="isLoading"><LoadingSpinner /></div>
+      <Button
+        v-else-if="total > items.length"
+        class="btn-primary w-lg"
+        @click="loadMore"
+        >Load More</Button
+      >
     </div>
   </div>
 </template>
 
 <script setup>
-import { ref, computed, onMounted } from "vue";
+import { ref, computed, onMounted, watch } from "vue";
 import { useRoute } from "vue-router";
 
 import LoadingSpinner from "@/components/LoadingSpinner.vue";
 import ListingSkeleton from "@/components/ListingSkeleton.vue";
 import ListingItem from "@/components/ListingItem.vue";
 import ResultFound from "@/components/ResultFound.vue";
+import EmptyState from "@/components/EmptyState.vue";
 import Button from "@/components/ui/Button.vue";
 import { useHead } from "@unhead/vue";
+
+const route = useRoute();
 
 useHead({
   title: "Home Page | Look Estate",
@@ -35,52 +53,68 @@ useHead({
   ],
 });
 
-const router = useRoute();
-
 const items = ref([]);
 const isLoading = ref(true);
-const prefix = ref("");
 const total = ref(0);
 const page = ref(1);
 const listingContainer = ref(null);
 
-onMounted(() => {
-  prefix.value = process.env.VUE_APP_API_URL;
-});
+const prefix =
+  (typeof process !== "undefined" && process.env.VUE_APP_API_URL) || "";
+
+const fetchItems = async (isLoadMore = false) => {
+  if (!isLoadMore) {
+    isLoading.value = true;
+    page.value = 1;
+    items.value = [];
+  }
+
+  const query = route.query.q || "";
+  let url = `${prefix}/properties?page=${page.value}`;
+  if (query) {
+    url += `&q=${encodeURIComponent(query)}`;
+  }
+
+  try {
+    const res = await fetch(url);
+    if (!res.ok) throw new Error("Network response was not ok");
+    const data = await res.json();
+
+    if (isLoadMore) {
+      if (data.results) items.value.push(...data.results);
+    } else {
+      items.value = data.results || [];
+      total.value = data.total || 0;
+    }
+  } catch (err) {
+    console.error("Failed to fetch properties:", err);
+    if (!isLoadMore) {
+      items.value = [];
+      total.value = 0;
+    }
+  } finally {
+    isLoading.value = false;
+  }
+};
 
 onMounted(() => {
-  var url = prefix.value + "/properties";
-  if (router.query.q) {
-    url = prefix.value + "/properties?q=" + router.query.q;
-  }
-  fetch(url)
-    .then((res) => res.json())
-    .then((data) => {
-      items.value.push(...data.results);
-      isLoading.value = false;
-      total.value = data.total;
-    });
+  fetchItems();
 });
+
+watch(
+  () => route.query.q,
+  () => {
+    fetchItems();
+  }
+);
 
 const resultFound = computed(() => {
-  return total.value.toLocaleString();
+  return (total.value || 0).toLocaleString();
 });
 
-const loadMore = () => {
-  isLoading.value = true;
+const loadMore = async () => {
   page.value += 1;
-  const url = prefix.value + "/properties?page=" + page.value;
-  fetch(url)
-    .then((res) => res.json())
-    .then((data) => {
-      items.value.push(...data.results);
-      isLoading.value = false;
-    })
-    .catch((err) => {
-      console.log(err);
-      isLoading.value = false;
-      // TODO: show notification to user
-    });
+  fetchItems(true);
 };
 </script>
 
@@ -90,43 +124,63 @@ const loadMore = () => {
   justify-content: center;
   align-items: center;
   height: 100px;
+  width: 100%;
 }
 .listing-container {
-  height: 100%;
+  display: flex;
+  flex-direction: column;
+  min-height: 500px;
+  padding: 40px 0;
+  width: 100%;
 }
 ul {
-  justify-content: space-between;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
   width: 100%;
   list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+.skeleton-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+  width: 100%;
+}
+.skeleton-item {
+  width: calc(33.33% - 16px);
+}
+.loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100px;
+  width: 100%;
 }
 .w-lg {
   padding: 0px 20px;
 }
 @media only screen and (max-width: 600px) {
-  ul {
-    display: flex;
+  ul,
+  .skeleton-grid {
     flex-direction: column;
-    gap: 12px;
+  }
+  ul li,
+  .skeleton-item {
+    width: 100% !important;
   }
 }
-@media only screen and (min-width: 600px) {
-  ul {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 16px;
-  }
-  ul li {
-    width: 48%;
+@media only screen and (min-width: 600px) and (max-width: 991px) {
+  ul li,
+  .skeleton-item {
+    width: calc(50% - 12px) !important;
   }
 }
 @media only screen and (min-width: 992px) {
-  ul {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 16px;
-  }
-  ul li {
-    width: 32%;
+  ul li,
+  .skeleton-item {
+    width: calc(33.33% - 16px) !important;
   }
 }
 </style>

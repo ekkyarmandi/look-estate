@@ -1,14 +1,26 @@
 <template>
-  <input @change.prevent="$emit('change', $event)" :value="value" type="text" :placeholder="placeholder" />
+  <input
+    @change.prevent="$emit('change', $event)"
+    @input="$emit('update:value', $event.target.value)"
+    :value="value"
+    :type="type || 'text'"
+    :placeholder="placeholder"
+  />
 </template>
 
 <script setup>
+import { defineProps, defineEmits } from "vue";
 
-import { defineProps,defineEmits } from "vue";
+defineOptions({
+  name: "AppInput",
+});
 
-const { placeholder,value } = defineProps(["placeholder","value"]);
-const emit = defineEmits(["change"]);
-
+const { placeholder, value, type } = defineProps([
+  "placeholder",
+  "value",
+  "type",
+]);
+defineEmits(["change", "update:value"]);
 </script>
 
 <style>

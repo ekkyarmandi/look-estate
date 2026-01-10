@@ -5,8 +5,12 @@
 <script setup>
 import { computed, defineProps, defineEmits } from "vue";
 
+defineOptions({
+  name: "AppButton"
+});
+
 const props = defineProps(["class"]);
-const emit = defineEmits(["click"]);
+defineEmits(["click"]);
 
 const customClass = computed(() => {
   return props.class;

@@ -1,5 +1,7 @@
 <template>
-  <ListingContainer />
+  <div class="container">
+    <ListingContainer />
+  </div>
 </template>
 
 <script setup>

@@ -1,13 +1,16 @@
 <template>
   <div>
-  <p>This website is part of <a href="https://ekkyarmandi.com">EkkyArmandi.com</a> portfolio</p>
+    <p>
+      This website is part of
+      <a href="https://www.ekky.dev">ekky.dev</a> portfolio
+    </p>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'Copyright'
-}
+  name: "AppCopyright",
+};
 </script>
 
 <style scoped>

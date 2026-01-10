@@ -24,22 +24,22 @@
         <HouseIcon />
         <p>{{ data.property_type }}</p>
       </Badge>
-      <Badge v-if:="!noBedroom">
-        <BedIcon />
-        <p>{{ data.bedrooms }}</p>
-      </Badge>
-      <Badge v-if:="!noBathroom">
-        <BathIcon />
-        <p>{{ data.bathrooms }}</p>
-      </Badge>
-      <Badge v-if:="!noBuildSize">
-        <BuildingIcon />
-        <p>{{ buildingSize }} sqm</p>
-      </Badge>
-      <Badge v-if:="!noLandSize">
-        <AreaIcon />
-        <p>{{ landSize }} sqm</p>
-      </Badge>
+      <Badge v-if="!noBedroom">
+         <BedIcon />
+         <p>{{ data.bedrooms }}</p>
+       </Badge>
+       <Badge v-if="!noBathroom">
+         <BathIcon />
+         <p>{{ data.bathrooms }}</p>
+       </Badge>
+       <Badge v-if="!noBuildSize">
+         <BuildingIcon />
+         <p>{{ buildingSize }} sqm</p>
+       </Badge>
+       <Badge v-if="!noLandSize">
+         <AreaIcon />
+         <p>{{ landSize }} sqm</p>
+       </Badge>
     </div>
   </div>
 </template>
@@ -47,23 +47,21 @@
 <script setup>
 import Badge from "@/components/Badge.vue";
 import Thumbnail from "@/components/Thumbnail.vue";
-import HashIcon from "@/assets/icons/HashIcon.vue";
 import BedIcon from "@/assets/icons/BedIcon.vue";
 import BathIcon from "@/assets/icons/BathIcon.vue";
 import BuildingIcon from "@/assets/icons/BuildingIcon.vue";
 import AreaIcon from "@/assets/icons/AreaIcon.vue";
 import ScriptIcon from "@/assets/icons/ScriptIcon.vue";
-import LeftIcon from "@/assets/icons/LeftIcon.vue";
-import RightIcon from "@/assets/icons/RightIcon.vue";
 import LocationIcon from "@/assets/icons/LocationIcon.vue";
 import BookmarkIcon from "@/assets/icons/BookmarkIcon.vue";
 import HouseIcon from "@/assets/icons/HouseIcon.vue";
 import { useBookmarkStore } from "@/store/bookmark";
 import { storeToRefs } from "pinia";
 
-import { computed, defineProps } from "vue";
+import { computed } from "vue";
 
-const { data } = defineProps(["data"]);
+const props = defineProps(["data"]);
+const { data } = props;
 const bookmarkStore = useBookmarkStore();
 const { bookmarked } = storeToRefs(bookmarkStore);
 

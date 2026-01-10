@@ -4,7 +4,7 @@
       <img :key="idx" v-for="(img, idx) in thumbnails" :class="'thumbnail-image ' + (activeIdx != idx && 'hidden')" :data-index="activeIdx == idx ? 0 : -1" :src="img" />
     </div>
     <ul :class="'dots ' + dotsClass">
-      <li :key="idx" v-for:="(_, idx) in thumbnails" :class="activeDot == idx ? 'dot active' : 'dot'" @click="handleThumbnailChanges(idx, $event)"></li>
+      <li :key="idx" v-for="(_, idx) in thumbnails" :class="activeDot == idx ? 'dot active' : 'dot'" @click="handleThumbnailChanges(idx, $event)"></li>
     </ul>
     <div class="btn-container">
       <div class="btn-group">
@@ -26,7 +26,11 @@ import RightIcon from "@/assets/icons/RightIcon.vue";
 
 import { ref, computed, defineProps } from "vue";
 
-const { images, style, dotsClass } = defineProps(["images", "style", "dotsClass"]);
+defineOptions({
+  name: "AppThumbnail"
+});
+
+const { images, dotsClass } = defineProps(["images", "dotsClass"]);
 
 const activeIdx = ref(0);
 const activeDot = ref(0);

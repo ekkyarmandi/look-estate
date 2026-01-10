@@ -4,15 +4,30 @@
       <Logo />
     </a>
     <div class="search">
-      <Input placeholder="Search" :value="query" @change="searchProperties" />
-      <Button class="box btn-primary" @click="searchProperties"><SearchIcon /></Button>
+      <Input
+        placeholder="Search"
+        v-model="query"
+        @keyup.enter="searchProperties"
+      />
+      <Button class="box btn-primary" @click="searchProperties"
+        ><SearchIcon
+      /></Button>
       <Button class="box btn-light"><FilterIcon /></Button>
     </div>
     <div class="menu">
       <router-link to="/bookmarks"><BookmarkIcon /></router-link>
-      <Button class="btn-primary p-lg">Join Us</Button>
+      <div class="auth-anchor">
+        <Button class="btn-primary p-lg" @click="openAuth('signup')"
+          >Join Us</Button
+        >
+        <AuthModal
+          :show="showAuthModal"
+          :initialMode="authMode"
+          @close="showAuthModal = false"
+        />
+      </div>
       <p>or</p>
-      <p class="btn">Login</p>
+      <p class="btn" @click="openAuth('login')">Login</p>
     </div>
     <div class="burger-menu">
       <HearthIcon />
@@ -31,28 +46,44 @@ import SearchIcon from "@/assets/icons/SearchIcon.vue";
 import BurgerMenuIcon from "@/assets/icons/BurgerMenuIcon.vue";
 import FilterIcon from "@/assets/icons/FilterIcon.vue";
 import BookmarkIcon from "@/assets/icons/BookmarkIcon.vue";
+import HearthIcon from "@/assets/icons/HearthIcon.vue";
+import AuthModal from "@/components/ui/AuthModal.vue";
 
-import { ref, onMounted, defineProps, watch } from "vue";
-import { useRoute } from "vue-router";
+import { ref, onMounted, watch } from "vue";
+import { useRoute, useRouter } from "vue-router";
 
-const router = useRoute();
+defineOptions({
+  name: "AppHeader",
+});
 
-const query = ref(router.query.q || "");
-const prefixUrl = ref("");
+const route = useRoute();
+const router = useRouter();
 
-function searchProperties(e) {
-  window.location = "/?q=" + e.target.value;
+const query = ref(route.query.q || "");
+const showAuthModal = ref(false);
+const authMode = ref("login");
+
+const openAuth = (mode) => {
+  authMode.value = mode;
+  showAuthModal.value = true;
+};
+
+function searchProperties() {
+  router.push({
+    path: "/",
+    query: { q: query.value },
+  });
 }
 
 onMounted(() => {
-  prefixUrl.value = process.env.VUE_APP_API_URL;
+  process.env.VUE_APP_API_URL;
 });
 
 // watch the router query change
 watch(
-  () => router.query.q,
-  (newId, oldId) => {
-    query.value = router.query.q;
+  () => route.query.q,
+  (newQ) => {
+    query.value = newQ || "";
   }
 );
 </script>
@@ -75,6 +106,9 @@ nav {
   gap: 12px;
   justify-content: flex-end;
   align-items: center;
+}
+.auth-anchor {
+  position: relative;
 }
 .search {
   display: flex;

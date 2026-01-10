@@ -1,8 +1,10 @@
 <template>
   <Copyright />
   <div class="nav-border"><Header /></div>
-  <router-view />
-  <div ref="footer" class="footer-bg"><Footer /></div>
+  <main class="content-wrapper">
+    <router-view />
+  </main>
+  <footer class="footer-bg"><Footer /></footer>
 </template>
 
 <script setup>
@@ -23,6 +25,12 @@ import Footer from "@/components/Footer.vue";
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
   min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.content-wrapper {
+  flex: 1 0 auto;
 }
 
 .nav-border {

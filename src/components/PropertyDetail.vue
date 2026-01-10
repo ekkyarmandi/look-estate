@@ -7,34 +7,34 @@
       </div>
       <p class="attribute-title">Contract Type</p>
     </div>
-    <div v-if:="!noBedrooms" class="attribute-item">
-      <div class="item">
-        <BedIcon />
-        <p class="value">{{ data.bedrooms }}</p>
-      </div>
-      <p class="attribute-title">Bedrooms</p>
-    </div>
-    <div v-if:="!noBathrooms" class="attribute-item">
-      <div class="item">
-        <BathIcon />
-        <p class="value">{{ data.bathrooms }}</p>
-      </div>
-      <p class="attribute-title">Bathrooms</p>
-    </div>
-    <div v-if:="!noLandSize" class="attribute-item">
-      <div class="item">
-        <AreaIcon />
-        <p class="value">{{ landSize }} <span>sqm</span></p>
-      </div>
-      <p class="attribute-title">Land Size</p>
-    </div>
-    <div v-if:="!noBuildSize" class="attribute-item">
-      <div class="item">
-        <BuildingIcon />
-        <p class="value">{{ buildSize }} <span>sqm</span></p>
-      </div>
-      <p class="attribute-title">Building Size</p>
-    </div>
+    <div v-if="!noBedrooms" class="attribute-item">
+       <div class="item">
+         <BedIcon />
+         <p class="value">{{ data.bedrooms }}</p>
+       </div>
+       <p class="attribute-title">Bedrooms</p>
+     </div>
+     <div v-if="!noBathrooms" class="attribute-item">
+       <div class="item">
+         <BathIcon />
+         <p class="value">{{ data.bathrooms }}</p>
+       </div>
+       <p class="attribute-title">Bathrooms</p>
+     </div>
+     <div v-if="!noLandSize" class="attribute-item">
+       <div class="item">
+         <AreaIcon />
+         <p class="value">{{ landSize }} <span>sqm</span></p>
+       </div>
+       <p class="attribute-title">Land Size</p>
+     </div>
+     <div v-if="!noBuildSize" class="attribute-item">
+       <div class="item">
+         <BuildingIcon />
+         <p class="value">{{ buildSize }} <span>sqm</span></p>
+       </div>
+       <p class="attribute-title">Building Size</p>
+     </div>
   </div>
 </template>
 
@@ -45,9 +45,11 @@ import BathIcon from "@/assets/icons/BathIcon.vue";
 import AreaIcon from "@/assets/icons/AreaIcon.vue";
 import BuildingIcon from "@/assets/icons/BuildingIcon.vue";
 
-import { computed, defineProps } from "vue";
+import { computed } from "vue";
 
-const { data } = defineProps(["data"]);
+const props = defineProps(["data"]);
+const { data } = props;
+
 const buildSize = computed(() => data.build_size.toLocaleString("en-Us"));
 const landSize = computed(() => data.land_size.toLocaleString("en-Us"));
 

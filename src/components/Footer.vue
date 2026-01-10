@@ -7,7 +7,7 @@
           <p class="label">Contact</p>
           <div>
             <MailIcon />
-            <a class="email" href="mailto:ekkyarmandi.com">ekkyarmandi@gmail.com</a>
+            <a class="email" href="mailto:me@ekky.dev">me@ekky.dev</a>
           </div>
           <div>
             <PhoneIcon />
@@ -44,11 +44,18 @@
         </div>
       </div>
     </footer>
-    <p class="copyright">&copy; Copyright 2024. <a href="https://ekkyarmandi.com">EkkyArmandi.com</a>. All Rights Reserved.</p>
+    <p class="copyright">
+      &copy; Copyright 2024.
+      <a href="https://www.ekky.dev">ekky.dev</a>. All Rights Reserved.
+    </p>
   </div>
 </template>
 
 <script setup>
+defineOptions({
+  name: "AppFooter",
+});
+
 import Logo from "@/assets/icons/Logo.vue";
 import MailIcon from "@/assets/icons/MailIcon.vue";
 import PhoneIcon from "@/assets/icons/PhoneIcon.vue";
