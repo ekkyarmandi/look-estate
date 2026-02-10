@@ -2,6 +2,12 @@
   "name": "look_estate",
   "version": "0.2.0",
   "private": true,
+  "overrides": {
+    "tar": "^7.5.3",
+    "lodash": "^4.17.23",
+    "webpack": "^5.104.0",
+    "webpack-dev-server": "^5.2.1"
+  },
   "scripts": {
     "dev": "vue-cli-service serve",
     "build": "vue-cli-service build",
@@ -18,8 +24,8 @@
   "devDependencies": {
     "@babel/core": "^7.28.5",
     "@babel/eslint-parser": "^7.28.5",
-    "@vue/cli-plugin-babel": "^3.12.1",
-    "@vue/cli-plugin-eslint": "^3.12.1",
+    "@vue/cli-plugin-babel": "^5.0.9",
+    "@vue/cli-plugin-eslint": "^5.0.9",
     "@vue/cli-plugin-router": "~5.0.0",
     "@vue/cli-service": "~5.0.0",
     "eslint": "^8.57.1",
